@@ -10,8 +10,7 @@ require(
         'jquery',
         'App'
     ],
-    function ($,
-              App) {
+    function ($, App) {
         'use strict';
 
         $(document).ready(function () {

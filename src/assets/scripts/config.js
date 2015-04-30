@@ -9,7 +9,7 @@ require.config({
         //main libraries
         jquery: '../vendor/jquery/dist/jquery',
         handlebars: '../vendor/handlebars/handlebars.runtime.min',
-        structurejs: '../structurejs/src/',
+        structurejs: '../vendor/structurejs/src/',
         templates: './templates'
     },
 

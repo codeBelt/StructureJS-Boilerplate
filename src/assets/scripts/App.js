@@ -1,4 +1,4 @@
-efine(function (require, exports, module) { // jshint ignore:line
+define(function(require, exports, module) { // jshint ignore:line
     'use strict';
 
     // Imports
@@ -26,7 +26,7 @@ efine(function (require, exports, module) { // jshint ignore:line
         App.prototype.create = function () {
             _super.prototype.create.call(this);
 
-            // Create and add your child objects to this parent class.
+            // Create or setup objects in this parent class.
 
             console.log("create", this.$element);
         };
@@ -35,7 +35,7 @@ efine(function (require, exports, module) { // jshint ignore:line
          * @overridden DOMElement.layout
          */
         App.prototype.layout = function () {
-            // Layout or update the child objects in this parent class.
+            // Layout or update the objects in this parent class.
 
             console.log("layout");
 
@@ -46,9 +46,9 @@ efine(function (require, exports, module) { // jshint ignore:line
          * @overridden DOMElement.enable
          */
         App.prototype.enable = function () {
-            if (this.isEnabled === true) return this;
+            if (this.isEnabled === true) { return this; }
 
-            // Enable the child objects and add any event listeners.
+            // Enable the child objects and/or add any event listeners.
 
             console.log("enable");
 
@@ -59,9 +59,9 @@ efine(function (require, exports, module) { // jshint ignore:line
          * @overridden DOMElement.disable
          */
         App.prototype.disable = function () {
-            if (this.isEnabled === false) return this;
+            if (this.isEnabled === false) { return this; }
 
-            // Disable the child objects and remove any event listeners.
+            // Disable the child objects and/or remove any event listeners.
 
             return _super.prototype.disable.call(this);
         };
@@ -70,9 +70,10 @@ efine(function (require, exports, module) { // jshint ignore:line
          * @overridden DOMElement.destroy
          */
         App.prototype.destroy = function () {
-            _super.prototype.destroy.call(this);
+            // Call destroy on any child objects that is needed.
+            // This super method will also null out all properties automatically to prevent memory leaks.
 
-            // Destroy the child objects and references in this parent class to prevent memory leaks.
+            _super.prototype.destroy.call(this);
         };
 
         return App;
