@@ -16,7 +16,7 @@ module.exports = function(grunt) {
         handlebars: {
             compile: {
                 options: {
-                    amd: ['handlebars'],
+                    //amd: ['handlebars'],
                     namespace: 'JST',
                     // Registers all files that start with '_' as a partial.
                     partialRegex: /^_/,
@@ -30,8 +30,42 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    'src/assets/scripts/templates.js': 'src/templates/*.hbs'
+                    'src/assets/scripts/templates.js': 'src/assets/templates/**/*.hbs'
                 }
+            }
+        },
+
+        browserify: {
+            web: {
+                options: {
+                },
+                bundleOptions: {
+                    debug: true
+                },
+                files: {
+                    'web/assets/scripts/main.js': ['src/assets/scripts/main.js']
+                }
+            }
+        },
+
+        clean: {
+            web: ['web']
+        },
+
+        copy: {
+            styles: {
+                files: [{
+                    expand: true,
+                    cwd: 'src',
+                    dest: 'web/',
+                    src: [
+                        'index.html',
+                        'assets/media/**',
+                        'assets/vendor/todomvc-common/bg.png',
+                        'assets/{styles,vendor}/**/*.css',
+                        '!assets/vendor/structurejs/**/*.css'
+                    ]
+                }]
             }
         },
 
@@ -78,6 +112,9 @@ module.exports = function(grunt) {
     });
 
     // These plugins provide necessary tasks.
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-express');
     grunt.loadNpmTasks('grunt-open');
@@ -85,12 +122,17 @@ module.exports = function(grunt) {
 
     // Default task
     grunt.registerTask('default', [
+        'clean',
+        'browserify',
         'handlebars',
-        'watch'
+        'copy'
     ]);
 
     grunt.registerTask('launch', [
+        'clean',
+        'browserify',
         'handlebars',
+        'copy',
         'express',
         'open',
         'watch'
