@@ -35,12 +35,14 @@ module.exports = function(grunt) {
             }
         },
 
+        // https://github.com/thlorenz/browserify-shim
+        // https://github.com/thlorenz/browserify-shim/issues/40#issuecomment-40272317
         browserify: {
             web: {
                 options: {
-                },
-                bundleOptions: {
-                    debug: true
+                    preBundleCB: function(bundle) {
+                        bundle.require('./src/assets/scripts/templates.js');
+                    }
                 },
                 files: {
                     'web/assets/scripts/main.js': ['src/assets/scripts/main.js']
