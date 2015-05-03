@@ -117,6 +117,14 @@ module.exports = function(grunt) {
                     livereload: true
                 },
                 files: ['src/**/*.html', 'src/**/*.css'],
+                tasks: ['copy']
+            },
+            script: {
+                options: {
+                    livereload: true
+                },
+                files: ['src/**/*.js'],
+                tasks: ['browserify', 'copy', 'concat']
             },
             templates: {
                 options: {
