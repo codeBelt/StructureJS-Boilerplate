@@ -65,9 +65,24 @@ module.exports = function(grunt) {
                         'assets/media/**',
                         'assets/vendor/todomvc-common/bg.png',
                         'assets/{styles,vendor}/**/*.css',
-                        '!assets/vendor/structurejs/**/*.css'
+                        'assets/vendor/jquery/dist/jquery.js',
+                        '!assets/vendor/structurejs/**'
                     ]
                 }]
+            }
+        },
+
+        concat: {
+            options: {
+                separator: ';'
+            },
+            dist: {
+                src: [
+                    'src/assets/vendor/handlebars/handlebars.min.js',
+                    'src/assets/scripts/templates.js',
+                    'web/assets/scripts/main.js'
+                ],
+                dest: 'web/assets/scripts/main.js'
             }
         },
 
@@ -76,11 +91,11 @@ module.exports = function(grunt) {
          * Note: We are using the watch task to keep the server running.
          */
         express: {
-            src: {
+            web: {
                 options: {
                     port: 8000,
                     hostname: "0.0.0.0",
-                    bases: ['src/'],
+                    bases: ['web/'],
                     livereload: true
                 }
             }
@@ -90,9 +105,9 @@ module.exports = function(grunt) {
          * Opens the index.html file in the default browser after the node.js Express Server is running.
          */
         open: {
-            src: {
+            web: {
                 // Gets the port from the connect configuration
-                path: 'http://localhost:<%= express.src.options.port%>'
+                path: 'http://localhost:<%= express.web.options.port%>'
             }
         },
 
@@ -115,6 +130,7 @@ module.exports = function(grunt) {
 
     // These plugins provide necessary tasks.
     grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -127,7 +143,8 @@ module.exports = function(grunt) {
         'clean',
         'browserify',
         'handlebars',
-        'copy'
+        'copy',
+        'concat'
     ]);
 
     grunt.registerTask('launch', [
@@ -135,6 +152,7 @@ module.exports = function(grunt) {
         'browserify',
         'handlebars',
         'copy',
+        'concat',
         'express',
         'open',
         'watch'

@@ -23,7 +23,6 @@
     "tests"
   ],
   "dependencies": {
-    "requirejs": "*",
     "structurejs": "*"
   }
 }
