@@ -31,6 +31,8 @@
     "grunt-contrib-handlebars": "~0.9.3",
     "grunt-contrib-watch": "~0.6.1",
     "grunt-express": "^1.4.1",
-    "grunt-open": "~0.2.3"
+    "grunt-open": "~0.2.3",
+    "grunt-typescript": "^0.6.1",
+    "typescript": "^1.4.1"
   }
 }

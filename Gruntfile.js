@@ -87,6 +87,25 @@ module.exports = function(grunt) {
         },
 
         /**
+         * Compiles the TypeScript files.
+         */
+        typescript: {
+            base: {
+                src: ['src/assets/scripts/**/*.ts'],
+                dest: 'assets/scripts/',
+                options: {
+                    module: 'commonjs',
+                    target: 'es5',
+                    basePath: '',
+                    sourceMap: false,
+                    declaration: false,
+                    nolib: false,
+                    comments: true
+                }
+            }
+        },
+
+        /**
          * Creates a node.js Express Server to test our code in a server like environment.
          * Note: We are using the watch task to keep the server running.
          */
@@ -142,6 +161,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-typescript');
     grunt.loadNpmTasks('grunt-express');
     grunt.loadNpmTasks('grunt-open');
     grunt.loadNpmTasks('grunt-contrib-handlebars');
