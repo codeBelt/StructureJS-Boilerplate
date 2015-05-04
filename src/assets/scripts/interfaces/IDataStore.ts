@@ -1,4 +1,4 @@
-///<reference path='IEventDispatcher.ts'/>
+import IEventDispatcher = require('./IEventDispatcher');
 
 interface IDataStore extends IEventDispatcher {
     data:any;
@@ -6,3 +6,5 @@ interface IDataStore extends IEventDispatcher {
     complete:boolean;
     load():void;
 }
+
+export = IDataStore;

@@ -2,6 +2,7 @@ import Stage = require('../vendor/structurejs/ts/display/Stage');
 import LoaderEvent = require('../vendor/structurejs/ts/event/LoaderEvent');
 import BulkLoader = require('./utils/BulkLoader');
 import ImageLoader = require('./utils/ImageLoader');
+import DrawingBoard = require('./views/DrawingBoard');
 
 /**
  * TODO: YUIDoc_comment
@@ -15,7 +16,7 @@ class CommandPatternExample extends Stage {
 
     private static BASE_PATH:string = 'assets/media/images/';
 
-    //private _drawingBoard:DrawingBoard = null;
+    private _drawingBoard:DrawingBoard = null;
 
     constructor() {
         super();
@@ -50,8 +51,8 @@ class CommandPatternExample extends Stage {
     }
 
     private onAssetsLoadComplete(event:LoaderEvent):void {
-        //this._drawingBoard = new DrawingBoard(this.$element.find('#canvasId'));
-        //this.addChild(this._drawingBoard);
+        this._drawingBoard = new DrawingBoard(this.$element.find('#canvasId'));
+        this.addChild(this._drawingBoard);
     }
 
 }

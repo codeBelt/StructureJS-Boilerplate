@@ -1,39 +1,36 @@
-///<reference path='../../../vendor/structurejs/ts/display/DisplayObject.ts'/>
+import DisplayObject = require('../../../vendor/structurejs/ts/display/DisplayObject');
 
-module namespace {
+class Rectangle extends DisplayObject {
 
-    import DisplayObject = StructureJS.DisplayObject;
+    public color:string;
 
-    export class Rectangle extends DisplayObject {
+    constructor(x:number, y:number, width:number, height:number, color:string) {
+        super();
 
-        public color:string;
-
-        constructor(x:number, y:number, width:number, height:number, color:string) {
-            super();
-
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
-            this.height = height;
-            this.color = color;
-        }
-
-        public create():void {
-            super.create();
-        }
-
-        public layout():void {
-            this.ctx.translate(this.parent.x, this.parent.y);
-            this.ctx.translate(this.x, this.y);
-            this.ctx.beginPath();
-            this.ctx.rect(0, 0, this.width, this.height);
-            this.ctx.fillStyle = this.color;
-            this.ctx.fill();
-            this.ctx.lineWidth = 1;
-            this.ctx.strokeStyle = '#000000';
-            this.ctx.stroke();
-        }
-
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.height = height;
+        this.color = color;
     }
+
+    public create():void {
+        super.create();
+    }
+
+    public layout():void {
+        this.ctx.translate(this.parent.x, this.parent.y);
+        this.ctx.translate(this.x, this.y);
+        this.ctx.beginPath();
+        this.ctx.rect(0, 0, this.width, this.height);
+        this.ctx.fillStyle = this.color;
+        this.ctx.fill();
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeStyle = '#000000';
+        this.ctx.stroke();
+    }
+
 }
+
+export = Rectangle;
