@@ -1,5 +1,7 @@
 module.exports = function(grunt) {
 
+    var remapify = require('remapify');
+
     // Project configuration.
     grunt.initConfig({
 
@@ -35,13 +37,16 @@ module.exports = function(grunt) {
             }
         },
 
-        // https://github.com/thlorenz/browserify-shim
-        // https://github.com/thlorenz/browserify-shim/issues/40#issuecomment-40272317
         browserify: {
             web: {
                 options: {
                     preBundleCB: function(bundle) {
                         bundle.require('./src/assets/scripts/templates.js');
+                        bundle.plugin(remapify, [{
+                            cwd: './src/assets/vendor/structurejs/js',
+                            src: '**/*.js',
+                            expose: 'structurejs'
+                        }]);
                     }
                 },
                 files: {
