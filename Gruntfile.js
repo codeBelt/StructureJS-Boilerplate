@@ -41,17 +41,18 @@ module.exports = function(grunt) {
             web: {
                 options: {
                     preBundleCB: function(bundle) {
-                        bundle.require('./src/assets/scripts/templates.js');
+                        //bundle.require('./src/assets/scripts/templates.js');
                     }
                 },
                 files: {
-                    'web/assets/scripts/main.js': ['src/assets/scripts/main.js']
+                    'web/assets/scripts/main.js': ['.tmp/src/assets/scripts/CommandPatternExample.js']
                 }
             }
         },
 
         clean: {
-            web: ['web']
+            web: ['web'],
+            temp: ['.tmp']
         },
 
         copy: {
@@ -78,7 +79,7 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: [
-                    'src/assets/vendor/handlebars/handlebars.min.js',
+                    'src/assets/vendor/handlebars/handlebars.runtime.min.js',
                     'src/assets/scripts/templates.js',
                     'web/assets/scripts/main.js'
                 ],
@@ -90,13 +91,13 @@ module.exports = function(grunt) {
          * Compiles the TypeScript files.
          */
         typescript: {
-            base: {
+            web: {
                 src: ['src/assets/scripts/**/*.ts'],
-                dest: 'assets/scripts/',
+                dest: '.tmp/',
                 options: {
                     module: 'commonjs',
                     target: 'es5',
-                    basePath: '',
+                    basePath: './',
                     sourceMap: false,
                     declaration: false,
                     nolib: false,
@@ -169,16 +170,18 @@ module.exports = function(grunt) {
     // Default task
     grunt.registerTask('default', [
         'clean',
-        'browserify',
+        'typescript',
         'handlebars',
+        'browserify',
         'copy',
-        'concat'
+        'concat',
+        //'clean:temp'
     ]);
 
     grunt.registerTask('launch', [
         'clean',
-        'browserify',
         'handlebars',
+        'browserify',
         'copy',
         'concat',
         'express',
