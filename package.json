@@ -33,6 +33,7 @@
     "grunt-express": "^1.4.1",
     "grunt-open": "~0.2.3",
     "grunt-typescript": "^0.6.1",
+    "tsify": "^0.8.2",
     "typescript": "^1.4.1"
   }
 }
