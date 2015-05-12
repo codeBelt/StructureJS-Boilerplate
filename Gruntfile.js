@@ -46,17 +46,20 @@ module.exports = function(grunt) {
             web: {
                 options: {
                     preBundleCB: function(bundle) {
-                        //bundle.plugin(remapify, [{
-                        //    cwd: './src/assets/vendor/structurejs/ts',
-                        //    src: '**/*.ts',
-                        //    expose: 'structurejs'
-                        //}]);
-                            bundle.plugin('tsify', { });
+                        bundle.plugin('tsify', {
+                            removeComments: false,
+                            noImplicitAny: false,
+                            target: 'ES3'
+                        });
 
-                        //// Creates a CommonJS module around the script(s) in the file.
-                        //bundle.require('./src/assets/scripts/templates.js');
-                        //// Creates a alias for a library that is already CommonJS.
-
+                        // Creates a CommonJS module around the script(s) in the file.
+//                        bundle.require('./src/assets/scripts/templates.js');
+                        // Creates a alias for a library that is already CommonJS.
+//                        bundle.plugin(remapify, [{
+//                            cwd: './src/assets/vendor/structurejs/ts/',
+//                            src: '**/*.ts',
+//                            expose: 'structurejs'
+//                        }]);
                     }
                 },
                 files: {
