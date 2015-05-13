@@ -12,8 +12,7 @@
   },
   "browserify-shim": {
     "jquery": "global:$",
-    "handlebars": "global:Handlebars",
-    "three": "global:THREE"
+    "handlebars": "global:Handlebars"
   },
   "browserify": {
     "transform": [
