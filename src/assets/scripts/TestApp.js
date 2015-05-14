@@ -33,7 +33,7 @@ var TestApp = (function () {
          * TODO: YUIDoc_comment
          *
          * @property _loginView
-         * @type {NavigationView}
+         * @type {LoginView}
          * @private
          */
         this._loginView = null;
