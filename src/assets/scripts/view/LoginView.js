@@ -26,7 +26,7 @@ define(function(require, exports, module) { // jshint ignore:line
              * @type {string}
              * @constant
              */
-            this.TITLE_TEXT = 'StructureJS Boilerplate (Browserify)';
+            this.TITLE_TEXT = 'StructureJS Boilerplate (RequireJS)';
 
             /**
              * TODO: YUIDoc_comment

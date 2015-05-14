@@ -45,7 +45,7 @@ module.exports = function(grunt) {
         handlebars: {
             compile: {
                 options: {
-                    //amd: ['handlebars'],
+                    amd: ['handlebars'],
                     namespace: 'JST',
                     // Registers all files that start with '_' as a partial.
                     partialRegex: /^_/,
@@ -125,7 +125,7 @@ module.exports = function(grunt) {
                     livereload: true
                 },
                 files: ['src/**/*.js'],
-                tasks: ['browserify', 'copy', 'concat']
+                tasks: ['copy']
             },
             templates: {
                 options: {
