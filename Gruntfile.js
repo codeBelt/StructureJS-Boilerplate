@@ -68,8 +68,6 @@ module.exports = function(grunt) {
             web: {
                 options: {
                     preBundleCB: function(bundle) {
-                        bundle.require('./src/assets/vendor/handlebars/handlebars.runtime.min.js');
-                        bundle.require('./src/assets/scripts/templates.js');
                         bundle.plugin(remapify, [{
                             cwd: './src/assets/vendor/structurejs/js',
                             src: '**/*.js',
@@ -113,7 +111,8 @@ module.exports = function(grunt) {
             },
             dist: {
                 src: [
-//                    'src/assets/vendor/handlebars/handlebars.runtime.min.js',
+                    'src/assets/vendor/handlebars/handlebars.runtime.min.js',
+                    'src/assets/scripts/templates.js',
                     'web/assets/scripts/main.js'
                 ],
                 dest: 'web/assets/scripts/main.js'
