@@ -51,19 +51,10 @@ module.exports = function(grunt) {
                             noImplicitAny: false,
                             target: 'ES3'
                         });
-
-                        // Creates a CommonJS module around the script(s) in the file.
-//                        bundle.require('./src/assets/scripts/templates.js');
-                        // Creates a alias for a library that is already CommonJS.
-//                        bundle.plugin(remapify, [{
-//                            cwd: './src/assets/vendor/structurejs/ts/',
-//                            src: '**/*.ts',
-//                            expose: 'structurejs'
-//                        }]);
                     }
                 },
                 files: {
-                    'web/assets/scripts/main.js': ['src/assets/scripts/App.ts']
+                    'web/assets/scripts/main.js': ['src/assets/scripts/main.ts']
                 }
             }
         },
@@ -124,6 +115,7 @@ module.exports = function(grunt) {
             dist: {
                 src: [
                     'src/assets/vendor/handlebars/handlebars.runtime.min.js',
+                    'src/assets/scripts/templates.js',
                     'web/assets/scripts/main.js'
                 ],
                 dest: 'web/assets/scripts/main.js'
@@ -198,11 +190,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('launch', [
-        'clean',
-        'browserify',
-        'handlebars',
-        'copy',
-        'concat',
+        'default',
         'express',
         'open',
         'watch'

@@ -1,5 +1,5 @@
 {
-  "name": "StructureJS-Boilerplate",
+  "name": "StructureJS-Boilerplate-TypeScript",
   "version": "1.0.0",
   "description": "",
   "main": "",
@@ -35,8 +35,8 @@
     "grunt-usemin": "^3.0.0",
     "grunt-contrib-cssmin": "^0.12.3",
     "grunt-contrib-uglify": "^0.9.1",
-      "grunt-typescript": "^0.6.1",
-      "tsify": "^0.8.2",
-      "typescript": "^1.4.1"
+    "grunt-typescript": "^0.6.1",
+    "tsify": "^0.8.2",
+    "typescript": "^1.4.1"
   }
 }
