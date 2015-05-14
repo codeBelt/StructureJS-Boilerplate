@@ -78,8 +78,7 @@ module.exports = function(grunt) {
                         'assets/media/**',
                         'assets/vendor/todomvc-common/bg.png',
                         'assets/{styles,vendor}/**/*.css',
-                        'assets/vendor/jquery/dist/jquery.js',
-                        '!assets/vendor/structurejs/**'
+                        'assets/{scripts,vendor}/**/*.js'
                     ]
                 }]
             }

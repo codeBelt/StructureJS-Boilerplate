@@ -35,7 +35,7 @@ define(function(require, exports, module) { // jshint ignore:line
              * TODO: YUIDoc_comment
              *
              * @property _loginView
-             * @type {NavigationView}
+             * @type {LoginView}
              * @private
              */
             this._loginView = null;
