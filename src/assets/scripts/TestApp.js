@@ -1,101 +1,105 @@
-'use strict';
+define(function(require, exports, module) { // jshint ignore:line
+    'use strict';
 
-// Imports
-var Extend = require('structurejs/util/Extend');
-var Stage = require('structurejs/display/Stage');
-var NavigationView = require('./view/NavigationView');
-var LoginView = require('./view/LoginView');
+    // Imports
+    var Extend = require('structurejs/util/Extend');
+    var Stage = require('structurejs/display/Stage');
+    var NavigationView = require('./view/NavigationView');
+    var LoginView = require('./view/LoginView');
+    require('templates'); // jshint ignore:line
 
-/**
- * TODO: YUIDoc_comment
- *
- * @class TestApp
- * @extends Stage
- * @constructor
- **/
-var TestApp = (function () {
+    /**
+     * TODO: YUIDoc_comment
+     *
+     * @class TestApp
+     * @extends Stage
+     * @constructor
+     **/
+    var TestApp = (function () {
 
-    var _super = Extend(TestApp, Stage); // jshint ignore:line
+        var _super = Extend(TestApp, Stage); // jshint ignore:line
 
-    function TestApp() { // jshint ignore:line
-        _super.call(this);
+        function TestApp() { // jshint ignore:line
+            _super.call(this);
+
+            /**
+             * TODO: YUIDoc_comment
+             *
+             * @property _navigationView
+             * @type {NavigationView}
+             * @private
+             */
+            this._navigationView = null;
+
+            /**
+             * TODO: YUIDoc_comment
+             *
+             * @property _loginView
+             * @type {NavigationView}
+             * @private
+             */
+            this._loginView = null;
+        }
 
         /**
-         * TODO: YUIDoc_comment
-         *
-         * @property _navigationView
-         * @type {NavigationView}
-         * @private
+         * @overridden Stage.create
          */
-        this._navigationView = null;
+        TestApp.prototype.create = function () {
+            _super.prototype.create.call(this);
+
+            // Create or setup objects in this parent class.
+
+            this._navigationView = new NavigationView(this.$element.find('.js-navigationView'));
+            this.addChild(this._navigationView);
+
+            this._loginView = new LoginView();
+            this.addChild(this._loginView);
+        };
 
         /**
-         * TODO: YUIDoc_comment
-         *
-         * @property _loginView
-         * @type {NavigationView}
-         * @private
+         * @overridden Stage.enable
          */
-        this._loginView = null;
-    }
+        TestApp.prototype.enable = function () {
+            if (this.isEnabled === true) { return this; }
 
-    /**
-     * @overridden Stage.create
-     */
-    TestApp.prototype.create = function () {
-        _super.prototype.create.call(this);
+            // Enable the child objects and/or add any event listeners.
 
-        // Create or setup objects in this parent class.
+            return _super.prototype.enable.call(this);
+        };
 
-        this._navigationView = new NavigationView(this.$element.find('.js-navigationView'));
-        this.addChild(this._navigationView);
+        /**
+         * @overridden Stage.disable
+         */
+        TestApp.prototype.disable = function () {
+            if (this.isEnabled === false) { return this; }
 
-        this._loginView = new LoginView();
-        this.addChild(this._loginView);
-    };
+            // Disable the child objects and/or remove any event listeners.
 
-    /**
-     * @overridden Stage.enable
-     */
-    TestApp.prototype.enable = function () {
-        if (this.isEnabled === true) { return this; }
+            return _super.prototype.disable.call(this);
+        };
 
-        // Enable the child objects and/or add any event listeners.
+        /**
+         * @overridden Stage.layout
+         */
+        TestApp.prototype.layout = function () {
+            // Layout or update the objects in this parent class.
 
-        return _super.prototype.enable.call(this);
-    };
+            return this;
+        };
 
-    /**
-     * @overridden Stage.disable
-     */
-    TestApp.prototype.disable = function () {
-        if (this.isEnabled === false) { return this; }
+        /**
+         * @overridden Stage.destroy
+         */
+        TestApp.prototype.destroy = function () {
+            // Call destroy on any child objects.
+            // This super method will also null out your properties for garbage collection.
 
-        // Disable the child objects and/or remove any event listeners.
+            _super.prototype.destroy.call(this);
+        };
 
-        return _super.prototype.disable.call(this);
-    };
+        return TestApp;
+    })();
 
-    /**
-     * @overridden Stage.layout
-     */
-    TestApp.prototype.layout = function () {
-        // Layout or update the objects in this parent class.
+    module.exports = TestApp;
 
-        return this;
-    };
-
-    /**
-     * @overridden Stage.destroy
-     */
-    TestApp.prototype.destroy = function () {
-        // Call destroy on any child objects.
-        // This super method will also null out your properties for garbage collection.
-
-        _super.prototype.destroy.call(this);
-    };
-
-    return TestApp;
-})();
-
-module.exports = TestApp;
+});

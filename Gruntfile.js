@@ -64,23 +64,6 @@ module.exports = function(grunt) {
             }
         },
 
-        browserify: {
-            web: {
-                options: {
-                    preBundleCB: function(bundle) {
-                        bundle.plugin(remapify, [{
-                            cwd: './src/assets/vendor/structurejs/js',
-                            src: '**/*.js',
-                            expose: 'structurejs'
-                        }]);
-                    }
-                },
-                files: {
-                    'web/assets/scripts/main.js': ['src/assets/scripts/main.js']
-                }
-            }
-        },
-
         /**
          * Copy and needed files to the web folder.
          */
@@ -99,23 +82,6 @@ module.exports = function(grunt) {
                         '!assets/vendor/structurejs/**'
                     ]
                 }]
-            }
-        },
-
-        /**
-         * Merge and files with the generated Browserify file.
-         */
-        concat: {
-            options: {
-                separator: ';'
-            },
-            dist: {
-                src: [
-                    'src/assets/vendor/handlebars/handlebars.runtime.min.js',
-                    'src/assets/scripts/templates.js',
-                    'web/assets/scripts/main.js'
-                ],
-                dest: 'web/assets/scripts/main.js'
             }
         },
 
@@ -181,9 +147,7 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'clean',
         'handlebars',
-        'browserify',
-        'copy',
-        'concat'
+        'copy'
     ]);
 
     grunt.registerTask('launch', [

@@ -1,4 +1,4 @@
-# StructureJS Boilerplate (Browserify)
+# StructureJS Boilerplate (RequireJS)
 
 Download dependencies and build:
 
