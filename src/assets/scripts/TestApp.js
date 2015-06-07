@@ -1,4 +1,4 @@
-import DOMElement from 'vendor/structurejs/ecmascript/display/DOMElement';
+import DOMElement from './vendor/structurejs/ecmascript/display/DOMElement';
 
 class TestApp extends DOMElement {
 
