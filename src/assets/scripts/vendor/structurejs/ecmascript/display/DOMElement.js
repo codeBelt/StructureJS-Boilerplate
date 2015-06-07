@@ -1,4 +1,4 @@
-export class DOMElement {
+class DOMElement {
 
     constructor($element) {
         this.isEnabled = false;
