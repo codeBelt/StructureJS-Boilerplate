@@ -64,6 +64,17 @@ module.exports = function(grunt) {
             }
         },
 
+        babel: {
+            options: {
+                sourceMap: false
+            },
+            dist: {
+                files: {
+                    "web/assets/scripts/main.js": "src/assets/scripts/TestApp.js"
+                }
+            }
+        },
+
         /**
          * Copy and needed files to the web folder.
          */
@@ -146,7 +157,8 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'clean',
         'handlebars',
-        'copy'
+        'babel'
+        //'copy'
     ]);
 
     grunt.registerTask('launch', [

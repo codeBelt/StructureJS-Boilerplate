@@ -1,4 +1,4 @@
-# StructureJS Boilerplate (RequireJS)
+# StructureJS Boilerplate (BabelJS)
 
 Download dependencies and build:
 

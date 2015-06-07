@@ -1,82 +1,57 @@
-define(function(require, exports, module) { // jshint ignore:line
-    'use strict';
+class NavigationView extends DOMElement {
 
-    // Imports
-    var Extend = require('structurejs/util/Extend');
-    var DOMElement = require('structurejs/display/DOMElement');
+    constructor($element) {
+        super($element);
+    }
 
     /**
-     * TODO: YUIDoc_comment
-     *
-     * @class NavigationView
-     * @extends DOMElement
-     * @constructor
-     **/
-    var NavigationView = (function () {
+     * @overridden DOMElement.create
+     */
+    create() {
+        super.create();
 
-        var _super = Extend(NavigationView, DOMElement); // jshint ignore:line
+        // Create or setup objects in this parent class.
+    }
 
-        function NavigationView($element) { // jshint ignore:line
-            _super.call(this, $element);
-        }
+    /**
+     * @overridden DOMElement.enable
+     */
+    enable() {
+        if (this.isEnabled === true) { return this; }
 
-        /**
-         * @overridden DOMElement.create
-         */
-        NavigationView.prototype.create = function () {
-            _super.prototype.create.call(this);
+        // Enable the child objects and/or add any event listeners.
 
-            // Create or setup objects in this parent class.
-        };
+        return super.enable();
+    }
 
-        /**
-         * @overridden DOMElement.enable
-         */
-        NavigationView.prototype.enable = function () {
-            if (this.isEnabled === true) {
-                return this;
-            }
+    /**
+     * @overridden DOMElement.disable
+     */
+    disable() {
+        if (this.isEnabled === false) { return this; }
 
-            // Enable the child objects and/or add any event listeners.
+        // Disable the child objects and/or remove any event listeners.
 
-            return _super.prototype.enable.call(this);
-        };
+        return super.disable();
+    }
 
-        /**
-         * @overridden DOMElement.disable
-         */
-        NavigationView.prototype.disable = function () {
-            if (this.isEnabled === false) {
-                return this;
-            }
+    /**
+     * @overridden DOMElement.layout
+     */
+    layout() {
+        // Layout or update the objects in this parent class.
 
-            // Disable the child objects and/or remove any event listeners.
+        return this;
+    }
 
-            return _super.prototype.disable.call(this);
-        };
+    /**
+     * @overridden DOMElement.destroy
+     */
+    destroy() {
+        // Call destroy on any child objects.
+        // This super method will also null out your properties for garbage collection.
 
-        /**
-         * @overridden DOMElement.layout
-         */
-        NavigationView.prototype.layout = function () {
-            // Layout or update the objects in this parent class.
+        super.destroy();
+    }
 
-            return this;
-        };
-
-        /**
-         * @overridden DOMElement.destroy
-         */
-        NavigationView.prototype.destroy = function () {
-            // Call destroy on any child objects.
-            // This super method will also null out your properties for garbage collection.
-
-            _super.prototype.destroy.call(this);
-        };
-
-        return NavigationView;
-    })();
-
-    module.exports = NavigationView;
-
-});
+}

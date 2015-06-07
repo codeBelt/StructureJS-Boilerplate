@@ -1,105 +1,68 @@
-define(function(require, exports, module) { // jshint ignore:line
-    'use strict';
+import DOMElement from 'vendor/structurejs/ecmascript/display/DOMElement';
 
-    // Imports
-    var Extend = require('structurejs/util/Extend');
-    var Stage = require('structurejs/display/Stage');
-    var NavigationView = require('./view/NavigationView');
-    var LoginView = require('./view/LoginView');
-    require('templates'); // jshint ignore:line
+class TestApp extends DOMElement {
 
-    /**
-     * TODO: YUIDoc_comment
-     *
-     * @class TestApp
-     * @extends Stage
-     * @constructor
-     **/
-    var TestApp = (function () {
-
-        var _super = Extend(TestApp, Stage); // jshint ignore:line
-
-        function TestApp() { // jshint ignore:line
-            _super.call(this);
-
-            /**
-             * TODO: YUIDoc_comment
-             *
-             * @property _navigationView
-             * @type {NavigationView}
-             * @private
-             */
-            this._navigationView = null;
-
-            /**
-             * TODO: YUIDoc_comment
-             *
-             * @property _loginView
-             * @type {LoginView}
-             * @private
-             */
-            this._loginView = null;
-        }
+    constructor() {
+        super();
 
         /**
-         * @overridden Stage.create
+         * TODO: YUIDoc_comment
+         *
+         * @property _navigationView
+         * @type {NavigationView}
+         * @private
          */
-        TestApp.prototype.create = function () {
-            _super.prototype.create.call(this);
-
-            // Create or setup objects in this parent class.
-
-            this._navigationView = new NavigationView(this.$element.find('.js-navigationView'));
-            this.addChild(this._navigationView);
-
-            this._loginView = new LoginView();
-            this.addChild(this._loginView);
-        };
+        this._navigationView = null;
 
         /**
-         * @overridden Stage.enable
+         * TODO: YUIDoc_comment
+         *
+         * @property _loginView
+         * @type {LoginView}
+         * @private
          */
-        TestApp.prototype.enable = function () {
-            if (this.isEnabled === true) { return this; }
+        this._loginView = null;
+    }
 
-            // Enable the child objects and/or add any event listeners.
+    create() {
+        super.create();
 
-            return _super.prototype.enable.call(this);
-        };
+        // Create or setup objects in this parent class.
 
-        /**
-         * @overridden Stage.disable
-         */
-        TestApp.prototype.disable = function () {
-            if (this.isEnabled === false) { return this; }
+        this._navigationView = new NavigationView(this.$element.find('.js-navigationView'));
+        this.addChild(this._navigationView);
 
-            // Disable the child objects and/or remove any event listeners.
+        this._loginView = new LoginView();
+        this.addChild(this._loginView);
+    }
 
-            return _super.prototype.disable.call(this);
-        };
+    enable() {
+        if (this.isEnabled === false) { return this; }
 
-        /**
-         * @overridden Stage.layout
-         */
-        TestApp.prototype.layout = function () {
-            // Layout or update the objects in this parent class.
+        // Enable the child objects and/or add any event listeners.
 
-            return this;
-        };
+        return super.enable();
+    }
 
-        /**
-         * @overridden Stage.destroy
-         */
-        TestApp.prototype.destroy = function () {
-            // Call destroy on any child objects.
-            // This super method will also null out your properties for garbage collection.
+    disable() {
+        if (this.isEnabled === false) { return this; }
 
-            _super.prototype.destroy.call(this);
-        };
+        // Disable the child objects and/or remove any event listeners.
 
-        return TestApp;
-    })();
+        return super.disable();
+    }
 
-    module.exports = TestApp;
+    layout() {
+        // Layout or update the objects in this parent class.
 
-});
+        return this;
+    }
+
+    destroy() {
+        // Call destroy on any child objects.
+        // This super method will also null out your properties for garbage collection.
+
+        super.destroy();
+    }
+
+}

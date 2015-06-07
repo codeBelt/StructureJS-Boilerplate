@@ -1,7 +1,7 @@
 {
-  "name": "StructureJS Boilerplate (RequireJS)",
+  "name": "StructureJS Boilerplate (BabelJS)",
   "version": "(1.0.0)",
-  "homepage": "https://github.com/codeBelt/StructureJS-Boilerplate/tree/requirejs",
+  "homepage": "https://github.com/codeBelt/StructureJS-Boilerplate/tree/babel",
   "authors": [
     "(Robert S. <code@codeBelt.com>"
   ],
