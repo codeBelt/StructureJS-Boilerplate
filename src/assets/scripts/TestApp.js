@@ -1,6 +1,15 @@
-//import DOMElement from 'structurejs/display/DOMElement';
+import Stage from 'structurejs/display/Stage';
+import NavigationView from './view/NavigationView';
+import LoginView from './view/LoginView';
 
-class TestApp extends DOMElement {
+/**
+ * TODO: YUIDoc_comment
+ *
+ * @class TestApp
+ * @extends Stage
+ * @constructor
+ **/
+class TestApp extends Stage {
 
     constructor() {
         super();
@@ -24,6 +33,10 @@ class TestApp extends DOMElement {
         this._loginView = null;
     }
 
+
+    /**
+     * @overridden DOMElement.create
+     */
     create() {
         super.create();
 
@@ -36,14 +49,20 @@ class TestApp extends DOMElement {
         this.addChild(this._loginView);
     }
 
+    /**
+     * @overridden DOMElement.enable
+     */
     enable() {
-        if (this.isEnabled === false) { return this; }
+        if (this.isEnabled === true) { return this; }
 
         // Enable the child objects and/or add any event listeners.
 
         return super.enable();
     }
 
+    /**
+     * @overridden DOMElement.disable
+     */
     disable() {
         if (this.isEnabled === false) { return this; }
 
@@ -52,12 +71,18 @@ class TestApp extends DOMElement {
         return super.disable();
     }
 
+    /**
+     * @overridden DOMElement.layout
+     */
     layout() {
         // Layout or update the objects in this parent class.
 
         return this;
     }
 
+    /**
+     * @overridden DOMElement.destroy
+     */
     destroy() {
         // Call destroy on any child objects.
         // This super method will also null out your properties for garbage collection.

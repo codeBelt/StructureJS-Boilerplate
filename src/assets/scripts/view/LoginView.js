@@ -1,3 +1,12 @@
+import DOMElement from 'structurejs/display/DOMElement';
+
+/**
+ * TODO: YUIDoc_comment
+ *
+ * @class LoginView
+ * @extends DOMElement
+ * @constructor
+ **/
 class LoginView extends DOMElement {
 
     constructor($element) {
@@ -91,3 +100,5 @@ class LoginView extends DOMElement {
     }
 
 }
+
+export { LoginView };

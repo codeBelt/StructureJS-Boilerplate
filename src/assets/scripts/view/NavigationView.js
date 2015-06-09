@@ -1,3 +1,12 @@
+import DOMElement from 'structurejs/display/DOMElement';
+
+/**
+ * TODO: YUIDoc_comment
+ *
+ * @class NavigationView
+ * @extends DOMElement
+ * @constructor
+ **/
 class NavigationView extends DOMElement {
 
     constructor($element) {
@@ -55,3 +64,5 @@ class NavigationView extends DOMElement {
     }
 
 }
+
+export { NavigationView };
