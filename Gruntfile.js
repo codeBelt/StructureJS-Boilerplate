@@ -45,7 +45,7 @@ module.exports = function(grunt) {
         handlebars: {
             compile: {
                 options: {
-                    amd: ['handlebars'],
+                    //amd: ['handlebars'],
                     namespace: 'JST',
                     // Registers all files that start with '_' as a partial.
                     partialRegex: /^_/,
@@ -64,13 +64,27 @@ module.exports = function(grunt) {
             }
         },
 
-        babel: {
-            options: {
-                sourceMap: false
-            },
-            dist: {
+        browserify: {
+            web: {
+                options: {
+                    preBundleCB: function(bundle) {
+                        bundle.plugin(remapify, [{
+                            cwd: './src/assets/vendor/structurejs/js',
+                            src: '**/*.js',
+                            expose: 'structurejs'
+                        }]);
+                    },
+                    transform: [
+                        ['babelify', {
+                            loose: 'all'
+                        }]
+                    ]
+                },
                 files: {
-                    "web/assets/scripts/main.js": "src/assets/scripts/TestApp.js"
+                    // if the source file has an extension of es6 then
+                    // we change the name of the source file accordingly.
+                    // The result file's extension is always .js
+                    'web/assets/scripts/main.js': ['src/assets/scripts/main.js']
                 }
             }
         },
@@ -89,9 +103,27 @@ module.exports = function(grunt) {
                         'assets/media/**',
                         'assets/vendor/todomvc-common/bg.png',
                         'assets/{styles,vendor}/**/*.css',
-                        'assets/{scripts,vendor}/**/*.js'
+                        'assets/vendor/jquery/dist/jquery.js',
+                        '!assets/vendor/structurejs/**'
                     ]
                 }]
+            }
+        },
+
+        /**
+         * Merge and files with the generated Browserify file.
+         */
+        concat: {
+            options: {
+                separator: ';'
+            },
+            dist: {
+                src: [
+                    'src/assets/vendor/handlebars/handlebars.runtime.min.js',
+                    'src/assets/scripts/templates.js',
+                    'web/assets/scripts/main.js'
+                ],
+                dest: 'web/assets/scripts/main.js'
             }
         },
 
@@ -103,7 +135,7 @@ module.exports = function(grunt) {
             web: {
                 options: {
                     port: 8000,
-                    hostname: "0.0.0.0",
+                    hostname: '0.0.0.0',
                     bases: ['web/'],
                     livereload: true
                 }
@@ -136,7 +168,7 @@ module.exports = function(grunt) {
                     livereload: true
                 },
                 files: ['src/**/*.js'],
-                tasks: ['copy']
+                tasks: ['browserify', 'copy', 'concat']
             },
             templates: {
                 options: {
@@ -157,8 +189,9 @@ module.exports = function(grunt) {
     grunt.registerTask('default', [
         'clean',
         'handlebars',
-        'babel'
-        //'copy'
+        'browserify',
+        'copy',
+        'concat'
     ]);
 
     grunt.registerTask('launch', [
