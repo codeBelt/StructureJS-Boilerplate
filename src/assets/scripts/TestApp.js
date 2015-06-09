@@ -1,6 +1,6 @@
 import Stage from 'structurejs/display/Stage';
-import NavigationView from './view/NavigationView';
-import LoginView from './view/LoginView';
+import {NavigationView} from './view/NavigationView';
+import {LoginView} from './view/LoginView';
 
 /**
  * TODO: YUIDoc_comment
@@ -48,7 +48,7 @@ class TestApp extends Stage {
         this._loginView = new LoginView();
         this.addChild(this._loginView);
     }
-
+    
     /**
      * @overridden DOMElement.enable
      */
