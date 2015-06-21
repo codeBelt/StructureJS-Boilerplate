@@ -48,7 +48,7 @@ class TestApp extends Stage {
         this._loginView = new LoginView();
         this.addChild(this._loginView);
     }
-    
+
     /**
      * @overridden DOMElement.enable
      */

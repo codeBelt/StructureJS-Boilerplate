@@ -1,7 +1,5 @@
 'use strict';
 
-//import $ = from 'jquery';
-var $ = require('jquery');
 import {TestApp} from './TestApp';
 
 $(document).ready(function () {
