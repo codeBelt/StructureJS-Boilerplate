@@ -74,11 +74,7 @@ module.exports = function(grunt) {
                             expose: 'structurejs'
                         }]);
                     },
-                    transform: [
-                        ['babelify', {
-                            loose: 'all'
-                        }]
-                    ]
+                    transform: [['babelify']]
                 },
                 files: {
                     // if the source file has an extension of es6 then

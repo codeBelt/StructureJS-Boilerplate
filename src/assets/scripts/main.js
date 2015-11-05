@@ -1,6 +1,4 @@
-'use strict';
-
-import {TestApp} from './TestApp';
+import TestApp from './TestApp';
 
 $(document).ready(function () {
 

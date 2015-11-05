@@ -1,6 +1,6 @@
 import Stage from 'structurejs/display/Stage';
-import {NavigationView} from './view/NavigationView';
-import {LoginView} from './view/LoginView';
+import NavigationView from './view/NavigationView';
+import LoginView from './view/LoginView';
 
 /**
  * TODO: YUIDoc_comment
@@ -92,4 +92,4 @@ class TestApp extends Stage {
 
 }
 
-export { TestApp };
+export default TestApp;

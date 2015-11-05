@@ -101,4 +101,4 @@ class LoginView extends DOMElement {
 
 }
 
-export { LoginView };
+export default LoginView;

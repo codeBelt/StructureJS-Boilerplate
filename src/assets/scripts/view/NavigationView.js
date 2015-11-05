@@ -65,4 +65,4 @@ class NavigationView extends DOMElement {
 
 }
 
-export { NavigationView };
+export default NavigationView;
