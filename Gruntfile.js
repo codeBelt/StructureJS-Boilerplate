@@ -8,6 +8,8 @@ module.exports = function(grunt) {
     // Intelligently lazy-loads tasks and plugins as needed at runtime.
     require('jit-grunt')(grunt);
 
+    var shouldOpen = grunt.option('open');
+
     // Project configuration.
     grunt.initConfig({
 
@@ -84,28 +86,15 @@ module.exports = function(grunt) {
             }
         },
 
-        /**
-         * Creates a node.js Express Server to test our code in a server like environment.
-         * Note: We are using the watch task to keep the server running.
-         */
-        express: {
-            web: {
+        connect: {
+            server: {
                 options: {
-                    port: 8000,
-                    hostname: "0.0.0.0",
-                    bases: ['web/'],
-                    livereload: true
+                    port: 31415,
+                    protocol: 'http',
+                    base: 'web/',
+                    livereload: true,
+                    open: shouldOpen ? true : false // opens a tab in your default browser e.g. grunt launch --open
                 }
-            }
-        },
-
-        /**
-         * Opens the index.html file in the default browser after the node.js Express Server is running.
-         */
-        open: {
-            web: {
-                // Gets the port from the connect configuration
-                path: 'http://localhost:<%= express.web.options.port%>'
             }
         },
 
@@ -151,8 +140,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('launch', [
         'default',
-        'express',
-        'open',
+        'connect',
         'watch'
     ]);
 
