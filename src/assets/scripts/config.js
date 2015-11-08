@@ -6,7 +6,7 @@ require.config({
         requirejs: '../vendor/requirejs/require',
         jquery: '../vendor/jquery/dist/jquery',
         handlebars: '../vendor/handlebars/handlebars.runtime',
-        structurejs: '../vendor/structurejs/js/'
+        structurejs: '../vendor/structurejs/js'
     },
 
     shim: {
