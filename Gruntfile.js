@@ -1,12 +1,12 @@
 module.exports = function(grunt) {
 
-    var remapify = require('remapify');
+    // -- Plugins --------------------------------------------------------------
 
     // Uncomment the next line to report the Grunt execution time (for optimization, etc)
     //require('time-grunt')(grunt);
 
     // Intelligently lazy-loads tasks and plugins as needed at runtime.
-    require('jit-grunt')(grunt);
+    require('jit-grunt')(grunt)({ customTasksDir: 'tasks' });
 
     // Project configuration.
     grunt.initConfig({
@@ -36,52 +36,8 @@ module.exports = function(grunt) {
          * Deletes our production folder before we create a new build.
          */
         clean: {
-            web: ['web']
-        },
-
-        /**
-         * Takes our CommonJS files and compiles them together.
-         */
-        browserify: {
-            web: {
-                options: {
-                    preBundleCB: function(bundle) {
-                        bundle.plugin('tsify', {
-                            removeComments: false,
-                            noImplicitAny: false,
-                            target: 'ES3'
-                        });
-                    }
-                },
-                files: {
-                    'web/assets/scripts/main.js': ['src/assets/scripts/main.ts']
-                }
-            }
-        },
-
-        /**
-         * Compiles the Handlebars templates into pre-compiled handlebars templates
-         */
-        handlebars: {
-            compile: {
-                options: {
-                    //amd: ['handlebars'],
-                    namespace: 'JST',
-                    // Registers all files that start with '_' as a partial.
-                    partialRegex: /^_/,
-                    // Shortens the file path for the templates.
-                    processName: function(filePath) { // input:  src/templates/_header.hbs
-                        return filePath.slice(filePath.indexOf('template'), filePath.lastIndexOf('.')); // output: templates/_header
-                    },
-                    // Shortens the file path for the partials.
-                    processPartialName: function(filePath) { // input:  src/templates/_header.hbs
-                        return filePath.slice(filePath.indexOf('template'), filePath.lastIndexOf('.')); // output: templates/_header
-                    }
-                },
-                files: {
-                    'src/assets/scripts/templates.js': 'src/assets/templates/**/*.hbs'
-                }
-            }
+            before: ['web'],
+            after: ['.tmp']
         },
 
         /**
@@ -115,35 +71,10 @@ module.exports = function(grunt) {
             dist: {
                 src: [
                     'src/assets/vendor/handlebars/handlebars.runtime.min.js',
-                    'src/assets/scripts/templates.js',
+                    'src/assets/scripts/precompiledJst.js',
                     'web/assets/scripts/main.js'
                 ],
                 dest: 'web/assets/scripts/main.js'
-            }
-        },
-
-        /**
-         * Creates a node.js Express Server to test our code in a server like environment.
-         * Note: We are using the watch task to keep the server running.
-         */
-        express: {
-            web: {
-                options: {
-                    port: 8000,
-                    hostname: "0.0.0.0",
-                    bases: ['web/'],
-                    livereload: true
-                }
-            }
-        },
-
-        /**
-         * Opens the index.html file in the default browser after the node.js Express Server is running.
-         */
-        open: {
-            web: {
-                // Gets the port from the connect configuration
-                path: 'http://localhost:<%= express.web.options.port%>'
             }
         },
 
@@ -182,18 +113,20 @@ module.exports = function(grunt) {
      * grunt launch     (Will build code for production and open the browser with the application)
      */
     grunt.registerTask('default', [
-        'clean',
-        'browserify',
-        'handlebars',
+        'clean:before',
+        'buildTypeScript',
+        'precompileJst',
         'copy',
-        'concat'
+        'concat',
+        'clean:after'
     ]);
 
-    grunt.registerTask('launch', [
+    grunt.registerTask('launch', 'Runs build, launches http-server, watches for file changes', [
         'default',
-        'express',
-        'open',
+        'connectHttp',
         'watch'
     ]);
+
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
 };
