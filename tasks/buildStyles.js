@@ -41,7 +41,7 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            buildStyles: ['<%= env.DIR_SRC %>/**/*.hbs']
+            buildStyles: ['<%= env.DIR_SRC %>/index.html']
         },
 
         sass: {

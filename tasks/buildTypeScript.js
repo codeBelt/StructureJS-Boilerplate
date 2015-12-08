@@ -107,7 +107,7 @@ module.exports = function(grunt) {
             ? [
             'browserify:buildTypeScript',
             'useminPrepare:buildTypeScript',
-            //'scrub:buildTypeScript',
+            'scrub:buildTypeScript',
             'concat:generated',
             'uglify:generated',
             'clean:buildTypeScript'

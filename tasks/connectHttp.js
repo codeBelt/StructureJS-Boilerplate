@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         connect: {
             connectHttp: {
                 options: {
-                    port: 31415,
+                    port: 9000,
                     useAvailablePort: true,
                     protocol: 'http',
                     base: 'web/',
