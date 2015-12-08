@@ -7,7 +7,7 @@ module.exports = function(grunt) {
          * Turns any JSON files into JavaScript files.
          */
         json: {
-            dev: {
+            jsonToJS: {
                 options: {
                     namespace: 'JSON_DATA',
                     includePath: false,
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.registerTask('json2JS', [
-        'json'
+    grunt.registerTask('jsonToJS', [
+        'json:jsonToJS'
     ]);
 };

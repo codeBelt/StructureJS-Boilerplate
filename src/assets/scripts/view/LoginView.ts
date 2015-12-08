@@ -39,7 +39,7 @@ class LoginView extends DOMElement {
 
         // Create or setup objects in this parent class.
 
-        this._$loginBtn = this.$element.find('.js-loginBtn');
+        this._$loginBtn = this.$element.find('.js-loginView-loginBtn');
     }
 
     /**
@@ -79,11 +79,17 @@ class LoginView extends DOMElement {
      * @overridden DOMElement.destroy
      */
     public destroy():void {
+        this.disable();
+
         // Call destroy on any child objects.
         // This super method will also null out your properties for garbage collection.
 
         super.destroy();
     }
+
+    //////////////////////////////////////////////////////////////////////////////////
+    // EVENT HANDLERS
+    //////////////////////////////////////////////////////////////////////////////////
 
     /**
      * TODO: YUIDoc_comment
@@ -95,8 +101,9 @@ class LoginView extends DOMElement {
     private _onClick(event:JQueryEventObject):void {
         event.preventDefault();
 
-        alert('Sign In Button Clicked')
+        alert('Sign In Button Clicked');
     }
+
 }
 
 export = LoginView;

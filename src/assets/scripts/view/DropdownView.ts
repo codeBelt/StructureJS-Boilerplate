@@ -1,39 +1,25 @@
 import DOMElement = require('../../vendor/structurejs/ts/display/DOMElement');
 
-import DropdownView =  require('./DropdownView');
-
 /**
  * TODO: YUIDoc_comment
  *
- * @class NavigationView
+ * @class DropdownView
  * @extends DOMElement
  * @constructor
  **/
-class NavigationView extends DOMElement {
+class DropdownView extends DOMElement {
 
-    /**
-     * TODO: YUIDoc_comment
-     *
-     * @property _dropdownView
-     * @type {DropdownView}
-     * @protected
-     */
-    protected _dropdownView:DropdownView = null;
-
-    constructor($element:JQuery) {
-        super($element);
+    constructor() {
+        super();
     }
 
     /**
      * @overridden DOMElement.create
      */
     public create():void {
-        super.create();
+        super.create('#dropdownView-inlineTemplate');
 
-        let container:DOMElement = this.getChild('.js-navigationView-container');
-
-        this._dropdownView = new DropdownView();
-        container.addChild(this._dropdownView);
+        // Create or setup objects in this parent class.
     }
 
     /**
@@ -79,4 +65,4 @@ class NavigationView extends DOMElement {
 
 }
 
-export = NavigationView;
+export = DropdownView;

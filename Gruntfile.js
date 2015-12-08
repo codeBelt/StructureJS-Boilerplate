@@ -1,18 +1,24 @@
 module.exports = function(grunt) {
 
     // -- Plugins --------------------------------------------------------------
-
     // Uncomment the next line to report the Grunt execution time (for optimization, etc)
     //require('time-grunt')(grunt);
 
     // Intelligently lazy-loads tasks and plugins as needed at runtime.
     require('jit-grunt')(grunt)({ customTasksDir: 'tasks' });
 
-    // Project configuration.
+    // -- Options --------------------------------------------------------------
+    // All builds are considered to be development builds, unless they're not.
+    grunt.option('dev', !grunt.option('prod'));
+
+    // -- Configuration --------------------------------------------------------
     grunt.initConfig({
 
-        //Read the package.json
+        // Load `package.json`so we have access to the project metadata such as name and version number.
         pkg: grunt.file.readJSON('package.json'),
+
+        // Load `build-env.js`so we have access to the project environment configuration and constants.
+        env: require('./build-env'),
 
         /**
          * A code block that will be added to our minified code files.
@@ -44,37 +50,16 @@ module.exports = function(grunt) {
          * Copy and needed files to the web folder.
          */
         copy: {
-            styles: {
+            html: {
                 files: [{
                     expand: true,
                     cwd: 'src/',
                     dest: 'web/',
                     src: [
                         'index.html',
-                        'assets/media/**',
-                        'assets/vendor/todomvc-common/bg.png',
-                        'assets/{styles,vendor}/**/*.css',
-                        'assets/vendor/jquery/dist/jquery.js',
-                        '!assets/vendor/structurejs/**'
+                        'assets/media/**'
                     ]
                 }]
-            }
-        },
-
-        /**
-         * Merge and files with the generated Browserify file.
-         */
-        concat: {
-            options: {
-                separator: ';'
-            },
-            dist: {
-                src: [
-                    'src/assets/vendor/handlebars/handlebars.runtime.min.js',
-                    'src/assets/scripts/precompiledJst.js',
-                    'web/assets/scripts/main.js'
-                ],
-                dest: 'web/assets/scripts/main.js'
             }
         },
 
@@ -94,14 +79,14 @@ module.exports = function(grunt) {
                     livereload: true
                 },
                 files: ['src/**/*.ts'],
-                tasks: ['browserify', 'copy', 'concat']
+                tasks: ['buildTypeScript', 'clean:after']
             },
             templates: {
                 options: {
                     livereload: true
                 },
                 files: ['src/**/*.hbs'],
-                tasks: ['handlebars']
+                tasks: ['precompileJst',  'clean:after']
             }
         }
     });
@@ -109,15 +94,16 @@ module.exports = function(grunt) {
     /**
      * Grunt tasks:
      *
-     * grunt            (Will build code for production)
-     * grunt launch     (Will build code for production and open the browser with the application)
+     * grunt                (Will build code for production)
+     * grunt launch         (Will build code for production and watch files)
+     * grunt launch --open  (Will build code for production and watch files then opens a tab in your default browser)
      */
     grunt.registerTask('default', [
         'clean:before',
-        'buildTypeScript',
         'precompileJst',
+        'buildStyles',
+        'buildTypeScript',
         'copy',
-        'concat',
         'clean:after'
     ]);
 

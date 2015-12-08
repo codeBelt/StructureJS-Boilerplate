@@ -81,6 +81,8 @@ class TestApp extends Stage {
      * @overridden Stage.destroy
      */
     public destroy():void {
+        this.disable();
+
         // Call destroy on any child objects.
         // This super method will also null out your properties for garbage collection.
 
