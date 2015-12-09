@@ -50,13 +50,13 @@ module.exports = function(grunt) {
          * Copy and needed files to the web folder.
          */
         copy: {
-            html: {
+            data: {
                 files: [{
                     expand: true,
-                    cwd: 'src/',
-                    dest: 'web/',
+                    cwd: '<%= env.DIR_SRC %>',
+                    dest: '<%= env.DIR_DEST %>',
                     src: [
-                        'index.html',
+                        'assets/data/**/*',
                         'assets/media/**'
                     ]
                 }]
@@ -71,21 +71,21 @@ module.exports = function(grunt) {
                 options: {
                     livereload: true
                 },
-                files: ['src/**/*.html', 'src/**/*.css'],
+                files: ['<%= env.DIR_SRC %>/**/*.html', '<%= env.DIR_SRC %>/**/*.css'],
                 tasks: ['copy']
             },
             script: {
                 options: {
                     livereload: true
                 },
-                files: ['src/**/*.ts'],
+                files: ['<%= env.DIR_SRC %>/**/*.ts'],
                 tasks: ['buildTypeScript', 'clean:after']
             },
             templates: {
                 options: {
                     livereload: true
                 },
-                files: ['src/**/*.hbs'],
+                files: ['<%= env.DIR_SRC %>/**/*.hbs'],
                 tasks: ['precompileJst',  'clean:after']
             }
         }
@@ -100,10 +100,11 @@ module.exports = function(grunt) {
      */
     grunt.registerTask('default', [
         'clean:before',
+        'buildMarkup',
         'precompileJst',
         'buildStyles',
         'buildTypeScript',
-        'copy',
+        'copy:data',
         'clean:after'
     ]);
 
