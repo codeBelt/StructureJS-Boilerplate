@@ -11,26 +11,26 @@ import LoginView from './view/LoginView';
  **/
 class TestApp extends Stage {
 
+    /**
+     * TODO: YUIDoc_comment
+     *
+     * @property _navigationView
+     * @type {NavigationView}
+     * @private
+     */
+    _navigationView = null;
+
+    /**
+     * TODO: YUIDoc_comment
+     *
+     * @property _loginView
+     * @type {LoginView}
+     * @private
+     */
+    _loginView = null;
+
     constructor() {
         super();
-
-        /**
-         * TODO: YUIDoc_comment
-         *
-         * @property _navigationView
-         * @type {NavigationView}
-         * @private
-         */
-        this._navigationView = null;
-
-        /**
-         * TODO: YUIDoc_comment
-         *
-         * @property _loginView
-         * @type {LoginView}
-         * @private
-         */
-        this._loginView = null;
     }
 
 
@@ -84,6 +84,8 @@ class TestApp extends Stage {
      * @overridden DOMElement.destroy
      */
     destroy() {
+        this.disable();
+
         // Call destroy on any child objects.
         // This super method will also null out your properties for garbage collection.
 
