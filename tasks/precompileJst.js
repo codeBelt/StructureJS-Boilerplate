@@ -40,7 +40,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    '.tmp/assets/scripts/precompiledJst.js': '.tmp/templates/precompile/**/*.hbs'
+                    'web/assets/scripts/precompiledJst.js': '.tmp/templates/precompile/**/*.hbs'
                 }
             }
         },
@@ -62,6 +62,6 @@ module.exports = function(grunt) {
     grunt.registerTask('precompileJst', [
         'string-replace:precompileJst',
         'handlebars:precompileJst',
-        'copy:precompileJst'
+        //'copy:precompileJst'
     ]);
 };

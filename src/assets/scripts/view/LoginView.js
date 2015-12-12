@@ -35,7 +35,7 @@ class LoginView extends DOMElement {
      * @overridden DOMElement.create
      */
     create() {
-        super.create('templates/login/LoginTemplate', {title: this.TITLE_TEXT});
+        super.create('templates/precompile/login/LoginTemplate', {title: this.TITLE_TEXT});
 
         // Create or setup objects in this parent class.
 

@@ -33,7 +33,6 @@ class TestApp extends Stage {
         super();
     }
 
-
     /**
      * @overridden DOMElement.create
      */
@@ -41,7 +40,6 @@ class TestApp extends Stage {
         super.create();
 
         // Create or setup objects in this parent class.
-
         this._navigationView = new NavigationView(this.$element.find('.js-navigationView'));
         this.addChild(this._navigationView);
 

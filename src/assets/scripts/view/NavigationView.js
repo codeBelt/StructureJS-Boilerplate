@@ -9,15 +9,15 @@ import DOMElement from 'structurejs/display/DOMElement';
  **/
 class NavigationView extends DOMElement {
 
-    constructor($element) {
-        super($element);
+    constructor() {
+        super();
     }
 
     /**
      * @overridden DOMElement.create
      */
     create() {
-        super.create();
+        super.create('#dropdownView-inlineTemplate');
 
         // Create or setup objects in this parent class.
     }
