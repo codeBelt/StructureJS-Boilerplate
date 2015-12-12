@@ -23,7 +23,7 @@
     "tests"
   ],
   "dependencies": {
-    "requirejs": "2.1.16",
-    "structurejs": "*"
+    "requirejs": "~2.1.22",
+    "structurejs": "~0.9.2"
   }
 }
