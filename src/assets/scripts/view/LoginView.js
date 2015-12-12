@@ -27,8 +27,8 @@ class LoginView extends DOMElement {
      */
     _$loginBtn = null;
 
-    constructor($element) {
-        super($element);
+    constructor() {
+        super();
     }
 
     /**
@@ -89,10 +89,15 @@ class LoginView extends DOMElement {
         super.destroy();
     }
 
+    //////////////////////////////////////////////////////////////////////////////////
+    // EVENT HANDLERS
+    //////////////////////////////////////////////////////////////////////////////////
+
     /**
      * TODO: YUIDoc_comment
      *
      * @method _onClick
+     * @param JQueryEventObject
      * @private
      */
     _onClick(event) {
