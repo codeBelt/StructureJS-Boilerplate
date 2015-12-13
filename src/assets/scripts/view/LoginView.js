@@ -42,7 +42,7 @@ define(function(require, exports, module) { // jshint ignore:line
          * @overridden DOMElement.create
          */
         DropdownView.prototype.create = function () {
-            _super.prototype.create.call(this, 'templates/login/LoginTemplate', {title: this.TITLE_TEXT});
+            _super.prototype.create.call(this, 'templates/precompile/login/LoginTemplate', {title: this.TITLE_TEXT});
 
             // Create or setup objects in this parent class.
 
