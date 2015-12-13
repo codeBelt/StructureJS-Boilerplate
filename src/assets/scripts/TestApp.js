@@ -1,5 +1,3 @@
-'use strict';
-
 // Imports
 var Extend = require('structurejs/util/Extend');
 var Stage = require('structurejs/display/Stage');

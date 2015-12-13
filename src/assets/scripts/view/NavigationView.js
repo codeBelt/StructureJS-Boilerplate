@@ -1,8 +1,7 @@
-'use strict';
-
 // Imports
 var Extend = require('structurejs/util/Extend');
 var DOMElement = require('structurejs/display/DOMElement');
+var DropdownView = require('./DropdownView');
 
 /**
  * TODO: YUIDoc_comment
@@ -17,6 +16,15 @@ var NavigationView = (function () {
 
     function NavigationView($element) { // jshint ignore:line
         _super.call(this, $element);
+
+        /**
+         * TODO: YUIDoc_comment
+         *
+         * @property _dropdownView
+         * @type {DropdownView}
+         * @protected
+         */
+        this._dropdownView = null;
     }
 
     /**
@@ -25,7 +33,10 @@ var NavigationView = (function () {
     NavigationView.prototype.create = function () {
         _super.prototype.create.call(this);
 
-        // Create or setup objects in this parent class.
+        var container = this.getChild('.js-navigationView-container');
+
+        this._dropdownView = new DropdownView();
+        container.addChild(this._dropdownView);
     };
 
     /**

@@ -1,4 +1,6 @@
-import DOMElement from 'structurejs/display/DOMElement';
+// Imports
+var Extend = require('structurejs/util/Extend');
+var DOMElement = require('structurejs/display/DOMElement');
 
 /**
  * TODO: YUIDoc_comment
@@ -7,62 +9,67 @@ import DOMElement from 'structurejs/display/DOMElement';
  * @extends DOMElement
  * @constructor
  **/
-class DropdownView extends DOMElement {
+var DropdownView = (function () {
 
-    constructor() {
-        super();
+    var _super = Extend(DropdownView, DOMElement); // jshint ignore:line
+
+    function DropdownView() { // jshint ignore:line
+        _super.call(this);
     }
 
     /**
      * @overridden DOMElement.create
      */
-    create():void {
-        super.create('#dropdownView-inlineTemplate');
+    DropdownView.prototype.create = function () {
+        _super.prototype.create.call(this, '#dropdownView-inlineTemplate');
 
         // Create or setup objects in this parent class.
-    }
+    };
 
     /**
      * @overridden DOMElement.enable
      */
-    enable():void {
-        if (this.isEnabled === true) { return; }
+    DropdownView.prototype.enable = function () {
+        if (this.isEnabled === true) { return this; }
 
         // Enable the child objects and/or add any event listeners.
 
-        super.enable();
-    }
+        return _super.prototype.enable.call(this);
+    };
 
     /**
      * @overridden DOMElement.disable
      */
-    disable():void {
-        if (this.isEnabled === false) { return; }
+    DropdownView.prototype.disable = function () {
+        if (this.isEnabled === false) { return this; }
 
         // Disable the child objects and/or remove any event listeners.
 
-        super.disable();
-    }
+        return _super.prototype.disable.call(this);
+    };
 
     /**
      * @overridden DOMElement.layout
      */
-    layout():void {
+    DropdownView.prototype.layout = function () {
         // Layout or update the objects in this parent class.
-    }
+
+        return this;
+    };
 
     /**
      * @overridden DOMElement.destroy
      */
-    destroy():void {
+    DropdownView.prototype.destroy = function () {
         this.disable();
 
         // Call destroy on any child objects.
         // This super method will also null out your properties for garbage collection.
 
-        super.destroy();
-    }
+        _super.prototype.destroy.call(this);
+    };
 
-}
+    return DropdownView;
+})();
 
-export default DropdownView;
+module.exports = DropdownView;

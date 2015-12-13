@@ -1,5 +1,3 @@
-'use strict';
-
 // Imports
 var Extend = require('structurejs/util/Extend');
 var DOMElement = require('structurejs/display/DOMElement');
@@ -41,7 +39,7 @@ var LoginView = (function () {
      * @overridden DOMElement.create
      */
     LoginView.prototype.create = function () {
-        _super.prototype.create.call(this, 'templates/login/LoginTemplate', {title: this.TITLE_TEXT});
+        _super.prototype.create.call(this, 'templates/precompile/login/LoginTemplate', {title: this.TITLE_TEXT});
 
         // Create or setup objects in this parent class.
 
@@ -94,6 +92,10 @@ var LoginView = (function () {
 
         _super.prototype.destroy.call(this);
     };
+
+    //////////////////////////////////////////////////////////////////////////////////
+    // EVENT HANDLERS
+    //////////////////////////////////////////////////////////////////////////////////
 
     /**
      * TODO: YUIDoc_comment
