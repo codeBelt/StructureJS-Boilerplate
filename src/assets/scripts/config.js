@@ -4,8 +4,8 @@ require.config({
 
     paths: {
         requirejs: '../vendor/requirejs/require',
-        jquery: '../vendor/jquery/dist/jquery',
-        handlebars: '../vendor/handlebars/handlebars.runtime',
+        jquery: '../vendor/jquery/dist/jquery.min',
+        handlebars: '../vendor/handlebars/handlebars.min',
         structurejs: '../vendor/structurejs/js'
     },
 

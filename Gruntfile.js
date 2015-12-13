@@ -1,20 +1,24 @@
 module.exports = function(grunt) {
 
-    var remapify = require('remapify');
-
+    // -- Plugins --------------------------------------------------------------
     // Uncomment the next line to report the Grunt execution time (for optimization, etc)
     //require('time-grunt')(grunt);
 
     // Intelligently lazy-loads tasks and plugins as needed at runtime.
-    require('jit-grunt')(grunt);
+    require('jit-grunt')(grunt)({ customTasksDir: 'tasks' });
 
-    var shouldOpen = grunt.option('open');
+    // -- Options --------------------------------------------------------------
+    // All builds are considered to be development builds, unless they're not.
+    grunt.option('dev', !grunt.option('prod'));
 
-    // Project configuration.
+    // -- Configuration --------------------------------------------------------
     grunt.initConfig({
 
-        //Read the package.json
+        // Load `package.json`so we have access to the project metadata such as name and version number.
         pkg: grunt.file.readJSON('package.json'),
+
+        // Load `build-env.js`so we have access to the project environment configuration and constants.
+        env: require('./build-env'),
 
         /**
          * A code block that will be added to our minified code files.
@@ -38,63 +42,23 @@ module.exports = function(grunt) {
          * Deletes our production folder before we create a new build.
          */
         clean: {
-            web: ['web']
-        },
-
-        /**
-         * Compiles the Handlebars templates into pre-compiled handlebars templates
-         */
-        handlebars: {
-            compile: {
-                options: {
-                    amd: ['handlebars'],
-                    namespace: 'JST',
-                    // Registers all files that start with '_' as a partial.
-                    partialRegex: /^_/,
-                    // Shortens the file path for the templates.
-                    processName: function(filePath) { // input:  src/templates/_header.hbs
-                        return filePath.slice(filePath.indexOf('template'), filePath.lastIndexOf('.')); // output: templates/_header
-                    },
-                    // Shortens the file path for the partials.
-                    processPartialName: function(filePath) { // input:  src/templates/_header.hbs
-                        return filePath.slice(filePath.indexOf('template'), filePath.lastIndexOf('.')); // output: templates/_header
-                    }
-                },
-                files: {
-                    'src/assets/scripts/templates.js': 'src/assets/templates/**/*.hbs'
-                }
-            }
+            before: ['web', '.tmp']
         },
 
         /**
          * Copy and needed files to the web folder.
          */
         copy: {
-            styles: {
+            data: {
                 files: [{
                     expand: true,
-                    cwd: 'src/',
-                    dest: 'web/',
+                    cwd: '<%= env.DIR_SRC %>',
+                    dest: '<%= env.DIR_DEST %>',
                     src: [
-                        'index.html',
-                        'assets/media/**',
-                        'assets/vendor/todomvc-common/bg.png',
-                        'assets/{styles,vendor}/**/*.css',
-                        'assets/{scripts,vendor}/**/*.js'
+                        'assets/data/**/*',
+                        'assets/media/**'
                     ]
                 }]
-            }
-        },
-
-        connect: {
-            server: {
-                options: {
-                    port: 31415,
-                    protocol: 'http',
-                    base: 'web/',
-                    livereload: true,
-                    open: shouldOpen ? true : false // opens a tab in your default browser e.g. grunt launch --open
-                }
             }
         },
 
@@ -106,22 +70,22 @@ module.exports = function(grunt) {
                 options: {
                     livereload: true
                 },
-                files: ['src/**/*.html', 'src/**/*.css'],
+                files: ['<%= env.DIR_SRC %>/**/*.html', '<%= env.DIR_SRC %>/**/*.css'],
                 tasks: ['copy']
             },
             script: {
                 options: {
                     livereload: true
                 },
-                files: ['src/**/*.js'],
-                tasks: ['copy']
+                files: ['<%= env.DIR_SRC %>/**/*.js'],
+                tasks: ['buildRequire']
             },
             templates: {
                 options: {
                     livereload: true
                 },
-                files: ['src/**/*.hbs'],
-                tasks: ['handlebars']
+                files: ['<%= env.DIR_SRC %>/**/*.hbs'],
+                tasks: ['precompileJst']
             }
         }
     });
@@ -129,19 +93,25 @@ module.exports = function(grunt) {
     /**
      * Grunt tasks:
      *
-     * grunt            (Will build code for production)
-     * grunt launch     (Will build code for production and open the browser with the application)
+     * grunt                (Will build code for production)
+     * grunt launch         (Will build code for production and watch files)
+     * grunt launch --open  (Will build code for production and watch files then opens a tab in your default browser)
      */
     grunt.registerTask('default', [
-        'clean',
-        'handlebars',
-        'copy'
+        'clean:before',
+        'buildMarkup',
+        'precompileJst',
+        'buildStyles',
+        'buildRequire',
+        'copy:data'
     ]);
 
-    grunt.registerTask('launch', [
+    grunt.registerTask('launch', 'Runs build, launches http-server, watches for file changes', [
         'default',
-        'connect',
+        'connectHttp',
         'watch'
     ]);
+
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
 };
