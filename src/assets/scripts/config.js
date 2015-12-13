@@ -10,8 +10,7 @@ require.config({
     },
 
     shim: {
-        jquery: { exports: '$' },
-        handlebars: { exports: 'Handlebars' }
+        jquery: { exports: '$' }
     },
 
     waitSeconds: 120,
