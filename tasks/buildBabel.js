@@ -35,10 +35,7 @@ module.exports = function(grunt) {
                     transform: [['babelify', { stage: 0 }]]
                 },
                 files: {
-                    // if the source file has an extension of es6 then
-                    // we change the name of the source file accordingly.
-                    // The result file's extension is always .js
-                    '<%= env.DIR_DEST %>/assets/scripts/main.js': ['<%= env.DIR_SRC %>/assets/scripts/main.js']
+                    '<%= env.DIR_TMP %>/assets/scripts/main.js': ['<%= env.DIR_SRC %>/assets/scripts/main.js']
                 }
             }
         },
@@ -77,12 +74,20 @@ module.exports = function(grunt) {
         // Copies static files for non-optimized builds
         copy: {
             buildBabel: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= env.DIR_SRC %>',
-                    dest: '<%= env.DIR_DEST %>',
-                    src: ['assets/vendor/**/*.{map,js}']
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= env.DIR_SRC %>',
+                        dest: '<%= env.DIR_DEST %>',
+                        src: ['assets/vendor/**/*.{map,js}']
+                    },
+                    {
+                        expand: true,
+                        cwd: '<%= env.DIR_TMP %>',
+                        dest: '<%= env.DIR_DEST %>',
+                        src: ['assets/scripts/main.js']
+                    }
+                ]
             }
         }
 
