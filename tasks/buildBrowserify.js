@@ -2,6 +2,7 @@
 'use strict';
 
 module.exports = function(grunt) {
+    var remapify = require('remapify');
     var shouldMinify = !grunt.option('dev');
 
     // Help Grunt find the right plugins at runtime
@@ -15,25 +16,23 @@ module.exports = function(grunt) {
 
     grunt.config.merge({
 
-        /**
-         * Takes our CommonJS files and compiles them together.
-         */
         browserify: {
-            buildTypeScript: {
+            buildBrowserify: {
                 options: {
                     preBundleCB: function(bundle) {
-                        bundle.plugin('tsify', {
-                            removeComments: false,
-                            noImplicitAny: false,
-                            target: 'ES5'
-                        });
+                        bundle.plugin(remapify, [{
+                            cwd: './src/assets/vendor/structurejs/js',
+                            src: '**/*.js',
+                            expose: 'structurejs'
+                        }]);
                     },
                     browserifyOptions: {
                         debug: shouldMinify ? false : true
-                    }
+                    },
+                    transform: [['babelify', { stage: 0 }]]
                 },
                 files: {
-                    '<%= env.DIR_TMP %>/assets/scripts/main.js': ['<%= env.DIR_SRC %>/assets/scripts/main.ts']
+                    '<%= env.DIR_TMP %>/assets/scripts/main.js': ['<%= env.DIR_SRC %>/assets/scripts/main.js']
                 }
             }
         },
@@ -46,14 +45,14 @@ module.exports = function(grunt) {
                 staging: '<%= env.DIR_TMP %>',
                 dest: '<%= env.DIR_DEST %>',
                 flow: {
-                    buildTypeScript: {
+                    buildBrowserify: {
                         // Force js only
                         steps: { js: ['concat', 'uglifyjs'], css: [] },
                         post: {}
                     }
                 }
             },
-            buildTypeScript: ['<%= env.DIR_SRC %>/index.html']
+            buildBrowserify: ['<%= env.DIR_SRC %>/index.html']
         },
 
         concat: {
@@ -71,7 +70,7 @@ module.exports = function(grunt) {
 
         // Copies static files for non-optimized builds
         copy: {
-            buildTypeScriptDev: {
+            buildBrowserifyDev: {
                 files: [
                     {
                         expand: true,
@@ -87,7 +86,7 @@ module.exports = function(grunt) {
                     }
                 ]
             },
-            buildTypeScriptProd: {
+            buildBrowserifyProd: {
                 files: [
                     {
                         expand: true,
@@ -101,7 +100,7 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask('scrub:buildTypeScript', function() {
+    grunt.registerTask('scrub:buildBrowserify', function() {
         function scrub(name) {
             var config = JSON
                 .stringify(grunt.config.get(name))
@@ -114,19 +113,19 @@ module.exports = function(grunt) {
         scrub('uglify');
     });
 
-    grunt.registerTask('buildTypeScript',
+    grunt.registerTask('buildBrowserify',
         shouldMinify
             ? [
-            'browserify:buildTypeScript',
-            'copy:buildTypeScriptProd',
-            'useminPrepare:buildTypeScript',
-            'scrub:buildTypeScript',
+            'browserify:buildBrowserify',
+            'copy:buildBrowserifyProd',
+            'useminPrepare:buildBrowserify',
+            'scrub:buildBrowserify',
             'concat:generated',
             'uglify:generated'
         ]
             : [
-            'browserify:buildTypeScript',
-            'copy:buildTypeScriptDev'
+            'browserify:buildBrowserify',
+            'copy:buildBrowserifyDev'
         ]
     );
 

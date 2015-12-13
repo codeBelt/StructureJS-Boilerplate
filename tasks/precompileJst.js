@@ -3,6 +3,7 @@
 
 module.exports = function(grunt) {
     var pkg = require('../package.json');
+    var shouldMinify = !grunt.option('dev');
 
     grunt.config.merge({
         // Injects version number.
@@ -16,8 +17,8 @@ module.exports = function(grunt) {
                 },
                 files: [{
                     expand: true,
-                    cwd: 'src/templates/precompile/',
-                    dest: '.tmp/templates/precompile/',
+                    cwd: '<%= env.DIR_SRC %>/templates/precompile/',
+                    dest: '<%= env.DIR_TMP %>/templates/precompile/',
                     src: ['**/*.hbs']
                 }]
             }
@@ -40,7 +41,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    '.tmp/assets/scripts/precompiledJst.js': '.tmp/templates/precompile/**/*.hbs'
+                    '<%= env.DIR_TMP %>/assets/scripts/precompiledJst.js': '<%= env.DIR_TMP %>/templates/precompile/**/*.hbs'
                 }
             }
         },
@@ -50,8 +51,8 @@ module.exports = function(grunt) {
             precompileJst: {
                 files: [{
                     expand: true,
-                    cwd: '.tmp/',
-                    dest: 'src/',
+                    cwd: '<%= env.DIR_TMP %>/',
+                    dest: '<%= env.DIR_DEST %>/',
                     src: ['assets/scripts/precompiledJst.js']
                 }]
             }
@@ -59,9 +60,16 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask('precompileJst', [
-        'string-replace:precompileJst',
-        'handlebars:precompileJst',
-        'copy:precompileJst'
-    ]);
+    grunt.registerTask('precompileJst',
+        shouldMinify
+            ? [
+            'string-replace:precompileJst',
+            'handlebars:precompileJst'
+        ]
+            : [
+            'string-replace:precompileJst',
+            'handlebars:precompileJst',
+            'copy:precompileJst'
+        ]
+    );
 };
