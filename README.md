@@ -1,4 +1,4 @@
-# StructureJS Boilerplate (TypeScript)
+# StructureJS Boilerplate (Browserify)
 
 Download dependencies and build:
 

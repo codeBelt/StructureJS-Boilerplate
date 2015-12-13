@@ -17,7 +17,7 @@ module.exports = function(grunt) {
     grunt.config.merge({
 
         browserify: {
-            buildBrowserify: {
+            buildBabel: {
                 options: {
                     preBundleCB: function(bundle) {
                         bundle.plugin(remapify, [{
@@ -45,14 +45,14 @@ module.exports = function(grunt) {
                 staging: '<%= env.DIR_TMP %>',
                 dest: '<%= env.DIR_DEST %>',
                 flow: {
-                    buildBrowserify: {
+                    buildBabel: {
                         // Force js only
                         steps: { js: ['concat', 'uglifyjs'], css: [] },
                         post: {}
                     }
                 }
             },
-            buildBrowserify: ['<%= env.DIR_SRC %>/index.html']
+            buildBabel: ['<%= env.DIR_SRC %>/index.html']
         },
 
         concat: {
@@ -70,7 +70,7 @@ module.exports = function(grunt) {
 
         // Copies static files for non-optimized builds
         copy: {
-            buildBrowserifyDev: {
+            buildBabelDev: {
                 files: [
                     {
                         expand: true,
@@ -86,7 +86,7 @@ module.exports = function(grunt) {
                     }
                 ]
             },
-            buildBrowserifyProd: {
+            buildBabelProd: {
                 files: [
                     {
                         expand: true,
@@ -100,7 +100,7 @@ module.exports = function(grunt) {
 
     });
 
-    grunt.registerTask('scrub:buildBrowserify', function() {
+    grunt.registerTask('scrub:buildBabel', function() {
         function scrub(name) {
             var config = JSON
                 .stringify(grunt.config.get(name))
@@ -113,19 +113,19 @@ module.exports = function(grunt) {
         scrub('uglify');
     });
 
-    grunt.registerTask('buildBrowserify',
+    grunt.registerTask('buildBabel',
         shouldMinify
             ? [
-            'browserify:buildBrowserify',
-            'copy:buildBrowserifyProd',
-            'useminPrepare:buildBrowserify',
-            'scrub:buildBrowserify',
+            'browserify:buildBabel',
+            'copy:buildBabelProd',
+            'useminPrepare:buildBabel',
+            'scrub:buildBabel',
             'concat:generated',
             'uglify:generated'
         ]
             : [
-            'browserify:buildBrowserify',
-            'copy:buildBrowserifyDev'
+            'browserify:buildBabel',
+            'copy:buildBabelDev'
         ]
     );
 
