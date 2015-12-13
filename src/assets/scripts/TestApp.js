@@ -91,6 +91,8 @@ define(function(require, exports, module) { // jshint ignore:line
          * @overridden Stage.destroy
          */
         TestApp.prototype.destroy = function () {
+            this.disable();
+
             // Call destroy on any child objects.
             // This super method will also null out your properties for garbage collection.
 

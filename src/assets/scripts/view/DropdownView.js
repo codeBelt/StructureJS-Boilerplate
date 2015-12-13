@@ -18,35 +18,15 @@ define(function(require, exports, module) { // jshint ignore:line
 
         function DropdownView() { // jshint ignore:line
             _super.call(this);
-
-            /**
-             * TODO: YUIDoc_comment
-             *
-             * @property TITLE_TEXT
-             * @type {string}
-             * @constant
-             */
-            this.TITLE_TEXT = 'StructureJS Boilerplate (RequireJS)';
-
-            /**
-             * TODO: YUIDoc_comment
-             *
-             * @property _$loginBtn
-             * @type {jQuery}
-             * @private
-             */
-            this._$loginBtn = null;
         }
 
         /**
          * @overridden DOMElement.create
          */
         DropdownView.prototype.create = function () {
-            _super.prototype.create.call(this, 'templates/login/LoginTemplate', {title: this.TITLE_TEXT});
+            _super.prototype.create.call(this, '#dropdownView-inlineTemplate');
 
             // Create or setup objects in this parent class.
-
-            this._$loginBtn = this.$element.find('.js-loginBtn');
         };
 
         /**
@@ -56,8 +36,6 @@ define(function(require, exports, module) { // jshint ignore:line
             if (this.isEnabled === true) { return this; }
 
             // Enable the child objects and/or add any event listeners.
-
-            this._$loginBtn.addEventListener('click', this._onClick, this);
 
             return _super.prototype.enable.call(this);
         };
@@ -69,8 +47,6 @@ define(function(require, exports, module) { // jshint ignore:line
             if (this.isEnabled === false) { return this; }
 
             // Disable the child objects and/or remove any event listeners.
-
-            this._$loginBtn.removeEventListener('click', this._onClick, this);
 
             return _super.prototype.disable.call(this);
         };
@@ -94,22 +70,6 @@ define(function(require, exports, module) { // jshint ignore:line
             // This super method will also null out your properties for garbage collection.
 
             _super.prototype.destroy.call(this);
-        };
-
-        //////////////////////////////////////////////////////////////////////////////////
-        // EVENT HANDLERS
-        //////////////////////////////////////////////////////////////////////////////////
-
-        /**
-         * TODO: YUIDoc_comment
-         *
-         * @method _onClick
-         * @private
-         */
-        DropdownView.prototype._onClick = function(event) {
-            event.preventDefault();
-
-            alert('Sign In Button Clicked')
         };
 
         return DropdownView;

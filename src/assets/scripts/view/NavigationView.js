@@ -4,6 +4,7 @@ define(function(require, exports, module) { // jshint ignore:line
     // Imports
     var Extend = require('structurejs/util/Extend');
     var DOMElement = require('structurejs/display/DOMElement');
+    var DropdownView = require('./DropdownView');
 
     /**
      * TODO: YUIDoc_comment
@@ -18,6 +19,15 @@ define(function(require, exports, module) { // jshint ignore:line
 
         function NavigationView($element) { // jshint ignore:line
             _super.call(this, $element);
+
+            /**
+             * TODO: YUIDoc_comment
+             *
+             * @property _dropdownView
+             * @type {DropdownView}
+             * @protected
+             */
+            this._dropdownView = null;
         }
 
         /**
@@ -26,7 +36,10 @@ define(function(require, exports, module) { // jshint ignore:line
         NavigationView.prototype.create = function () {
             _super.prototype.create.call(this);
 
-            // Create or setup objects in this parent class.
+            var container = this.getChild('.js-navigationView-container');
+
+            this._dropdownView = new DropdownView();
+            container.addChild(this._dropdownView);
         };
 
         /**
@@ -68,6 +81,8 @@ define(function(require, exports, module) { // jshint ignore:line
          * @overridden DOMElement.destroy
          */
         NavigationView.prototype.destroy = function () {
+            this.disable();
+
             // Call destroy on any child objects.
             // This super method will also null out your properties for garbage collection.
 
