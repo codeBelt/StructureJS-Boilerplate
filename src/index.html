@@ -1,77 +1,84 @@
 <!doctype html>
 <html lang="en-us">
+
     <head>
         <!-- META DATA -->
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- SEO -->
         <title>StructureJS Boilerplate (RequireJS)</title>
-        <meta name="description" content=""/>
-        <meta name="author" content=""/>
+        <meta name="description" content="" />
+        <meta name="author" content="" />
 
         <!-- STYLESHEETS -->
-        <link rel="stylesheet" media="screen, projection" href="assets/styles/bootstrap.css" />
-        <link rel="stylesheet" media="screen, projection" href="assets/styles/screen.css" />
-        <link rel="stylesheet" media="print" href="assets/styles/print.css" />
+        <!-- build:css assets/styles/head.css -->
+        <!-- endbuild -->
+        <link rel="stylesheet" media="screen, projection" href="assets/styles/modern.css" />
     </head>
-    <body>
-        <!-- CONTENT -->
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="frame frame_header">
-                    <h1 id="js-page-title" class="hd-page"></h1>
-                    <a class="brand" href=""><i class="icon-logo">The</i> App</a>
-                    <div class="nav-collapse collapse">
-                        <div class="pull-right">
-                            <ul class="nav pull-right">
-                                <li>
-                                    <span id="js-online-status" class="label label-header label-success">Online</span>
-                                </li>
-                                <li id="js-user-dropdown" class="dropdown">
-                                    <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown"><span id="js-user-name">Welcome</span> <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                        <li>
-                                            <a id="js-edit-profile-link" class="online-only" href=""><i  class="icon-edit"></i> Edit Profile</a>
-                                        </li>
-                                        <li>
-                                            <a id="js-user-link" class="online-only" href=""><i class="icon-user"></i> User Administration</a>
-                                        </li>
-                                        <li>
-                                            <a id="js-dealer-link" class="online-only" href=""><i class="icon-globe"></i> Partner Management</a>
-                                        </li>
-                                        <li>
-                                            <a id="js-invite-link" class="online-only" href=""><i class="icon-envelope"></i> Invite User</a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a id="js-log-off" href=""><i class="icon-off"></i> Sign Out</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <!-- /nav -->
-                        </div>
-                        <!-- /pull-right -->
-                    </div>
-                    <!-- /nav-collapse -->
-                </div>
-                <!-- /container -->
-            </div>
-            <!-- /navbar-inner -->
-        </div>
-        <!-- /navbar -->
 
-        <!-- JAVASCRIPT -->
-        <script src="assets/vendor/requirejs/require.js"></script>
-        <script src="assets/scripts/config.js"></script>
-        <script>
-            /**
-             * Set route and kick off RequireJs, which begins loading of scripts
-             * starting from main.js.
-             */
-            require(['main']);
-        </script>
+    <body>
+    <!-- CONTENT -->
+    <div class="navbar navbar-inverse navbar-fixed-top js-navigationView">
+        <div class="navbar-inner">
+            <div class="frame frame_header">
+                <h1 class="hd-page"></h1>
+                <a class="brand" href=""><i class="icon-logo">The</i> App</a>
+                <div class="nav-collapse collapse">
+                    <div class="pull-right">
+                        <ul class="nav pull-right js-navigationView-container">
+                            <li>
+                                <span class="label label-header label-success">Online</span>
+                            </li>
+
+                        </ul>
+                        <!-- /nav -->
+                    </div>
+                    <!-- /pull-right -->
+                </div>
+                <!-- /nav-collapse -->
+            </div>
+            <!-- /container -->
+        </div>
+        <!-- /navbar-inner -->
+    </div>
+    <!-- /navbar -->
+
+    <script id="dropdownView-inlineTemplate" type="text/x-handlebars-template">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span>Welcome</span> <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <a class="online-only" href=""><i  class="icon-edit"></i> Edit Profile</a>
+                </li>
+                <li>
+                    <a class="online-only" href=""><i class="icon-user"></i> User Administration</a>
+                </li>
+                <li>
+                    <a class="online-only" href=""><i class="icon-globe"></i> Partner Management</a>
+                </li>
+                <li>
+                    <a class="online-only" href=""><i class="icon-envelope"></i> Invite User</a>
+                </li>
+                <li class="divider"></li>
+                <li>
+                    <a href="#"><i class="icon-off"></i> Sign Out</a>
+                </li>
+            </ul>
+        </li>
+    </script>
+
+    <!-- JAVASCRIPT -->
+    <script src="assets/vendor/requirejs/require.js"></script>
+    <script src="assets/scripts/config.js"></script>
+    <script>
+        /**
+         * Set route and kick off RequireJs, which begins loading of scripts
+         * starting from main.js.
+         */
+        require(['main']);
+    </script>
 
     </body>
+
 </html>
