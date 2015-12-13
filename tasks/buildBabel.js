@@ -44,7 +44,7 @@ module.exports = function(grunt) {
         // the appropriate `concat` and `uglify` configuration.
         useminPrepare: {
             options: {
-                root: '<%= env.DIR_SRC %>',
+                root: '<%= env.DIR_TMP %>',
                 staging: '<%= env.DIR_TMP %>',
                 dest: '<%= env.DIR_DEST %>',
                 flow: {
@@ -73,7 +73,7 @@ module.exports = function(grunt) {
 
         // Copies static files for non-optimized builds
         copy: {
-            buildBabel: {
+            buildBabelDev: {
                 files: [
                     {
                         expand: true,
@@ -86,6 +86,16 @@ module.exports = function(grunt) {
                         cwd: '<%= env.DIR_TMP %>',
                         dest: '<%= env.DIR_DEST %>',
                         src: ['assets/scripts/main.js']
+                    }
+                ]
+            },
+            buildBabelProd: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= env.DIR_SRC %>',
+                        dest: '<%= env.DIR_TMP %>',
+                        src: ['assets/vendor/**/*.{map,js}']
                     }
                 ]
             }
@@ -110,6 +120,7 @@ module.exports = function(grunt) {
         shouldMinify
             ? [
             'browserify:buildBabel',
+            'copy:buildBabelProd',
             'useminPrepare:buildBabel',
             'scrub:buildBabel',
             'concat:generated',
@@ -117,7 +128,7 @@ module.exports = function(grunt) {
         ]
             : [
             'browserify:buildBabel',
-            'copy:buildBabel'
+            'copy:buildBabelDev'
         ]
     );
 
