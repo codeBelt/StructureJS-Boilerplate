@@ -2,7 +2,6 @@
 'use strict';
 
 module.exports = function(grunt) {
-    var remapify = require('remapify');
     var shouldMinify = !grunt.option('dev');
 
     // Help Grunt find the right plugins at runtime
@@ -10,32 +9,85 @@ module.exports = function(grunt) {
         useminPrepare: 'grunt-usemin'
     });
 
-    // Clear out any previously generated usemin task configuration
-    grunt.config.set('concat', undefined);
-    grunt.config.set('uglify', undefined);
-
     grunt.config.merge({
+        // Copies static files for non-optimized builds
+        copy: {
+            buildRequire: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= env.DIR_SRC %>',
+                    dest: '<%= env.DIR_DEST %>',
+                    src: shouldMinify
+                        ? ['assets/scripts/config.js', 'assets/vendor/requirejs/require.js']
+                        : ['assets/{scripts,vendor}/**/*.js']
+                }]
+            }
+        },
 
-        /**
-         * Takes our CommonJS files and compiles them together.
-         */
-        browserify: {
+        // RequireJS plugin that will use uglify2 to build and minify our
+        // JavaScript, templates and any other data we include in the require
+        // files.
+        requirejs: {
+            options: {
+                // Path of source scripts, relative to this build file
+                baseUrl: '<%= env.DIR_SRC %>/assets/scripts',
+
+                // Path of shared configuration file
+                mainConfigFile: '<%= env.DIR_SRC %>/assets/scripts/config.js',
+
+                // Whether to generate source maps for easier debugging of
+                // concatenated and minified code in the browser.
+                generateSourceMaps: grunt.option('maps'),
+
+                // Whether to preserve comments with a license. Not needed when,
+                // and oddly incompatible with, generating a source map.
+                preserveLicenseComments: grunt.option('no-maps'),
+
+                // Allow `'use strict';` be included in the RequireJS files
+                useStrict: true,
+
+                // Comments that start with //>> are build pragmas. Exmaple:
+                //
+                //     //>>includeStart("isDev", pragmas.isDev);
+                //     ... debugging code here ...
+                //     //>>includeEnd("isDev");
+                //
+                pragmas: {
+                    isProd: grunt.option('prod'),
+                    isDev: grunt.option('dev')
+                },
+
+                // Whether and how to optimize
+                optimize: shouldMinify ? 'uglify2' : 'none',
+
+                // Minification options
+                uglify2: {
+                    output: {
+                        beautify: false,
+                        comments: false
+                    },
+                    compress: {
+                        sequences: false,
+                        global_defs: { // jshint ignore:line
+                            DEBUG: false
+                        }
+                    },
+                    warnings: false,
+                    mangle: true
+                }
+            },
             buildRequire: {
                 options: {
-                    preBundleCB: function(bundle) {
-                        bundle.plugin(remapify, [{
-                            cwd: './src/assets/vendor/structurejs/js',
-                            src: '**/*.js',
-                            expose: 'structurejs'
-                        }]);
-                    },
-                    browserifyOptions: {
-                        debug: shouldMinify ? false : true
-                    },
-                    transform: [['babelify', { stage: 0 }]]
-                },
-                files: {
-                    '<%= env.DIR_TMP %>/assets/scripts/main.js': ['<%= env.DIR_SRC %>/assets/scripts/main.js']
+                    // Name of input script (.js extension inferred)
+                    name: 'main',
+
+                    // Destination path of final output
+                    out: '<%= env.DIR_DEST %>/assets/scripts/main.js',
+
+                    // Override paths to exclude certain files from build
+                    paths: {
+                        modernizr: 'empty:'
+                    }
                 }
             }
         },
@@ -44,7 +96,7 @@ module.exports = function(grunt) {
         // the appropriate `concat` and `uglify` configuration.
         useminPrepare: {
             options: {
-                root: '<%= env.DIR_TMP %>',
+                root: '<%= env.DIR_SRC %>',
                 staging: '<%= env.DIR_TMP %>',
                 dest: '<%= env.DIR_DEST %>',
                 flow: {
@@ -55,36 +107,8 @@ module.exports = function(grunt) {
                     }
                 }
             },
-            buildRequire: ['<%= env.DIR_SRC %>/index.html']
-        },
-
-        concat: {
-            options: {
-                separator: ';'
-            }
-        },
-
-        uglify: {
-            options: {
-                warnings: false,
-                mangle: true
-            }
-        },
-
-        // Copies static files for non-optimized builds
-        copy: {
-            buildRequire: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: '<%= env.DIR_SRC %>',
-                        dest: '<%= env.DIR_DEST %>',
-                        src: ['assets/{scripts,vendor}/**/*.{map,js}']
-                    }
-                ]
-            }
+            buildRequire: ['<%= env.DIR_SRC %>/**/*.html']
         }
-
     });
 
     grunt.registerTask('scrub:buildRequire', function() {
@@ -103,11 +127,15 @@ module.exports = function(grunt) {
     grunt.registerTask('buildRequire',
         shouldMinify
             ? [
-            'copy:buildRequire'
+            'copy:buildRequire',
+            'requirejs:buildRequire',
+            'useminPrepare:buildRequire',
+            'scrub:buildRequire',
+            'concat:generated',
+            'uglify:generated'
         ]
             : [
             'copy:buildRequire'
         ]
     );
-
 };
