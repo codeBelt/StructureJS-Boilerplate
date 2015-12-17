@@ -3,10 +3,10 @@ require.config({
     baseUrl: 'assets/scripts/',
 
     paths: {
-        requirejs: '../vendor/requirejs/require',
+        requirejs: '',
         jquery: '../vendor/jquery/dist/jquery.min',
-        handlebars: '../vendor/handlebars/handlebars.min',
-        structurejs: '../vendor/structurejs/js'
+        handlebars: '../vendor/handlebars/handlebars',
+        structurejs: '../vendor/structurejs/js/'
     },
 
     shim: {

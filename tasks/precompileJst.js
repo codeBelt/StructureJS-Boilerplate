@@ -27,7 +27,7 @@ module.exports = function(grunt) {
         handlebars: {
             precompileJst: {
                 options: {
-                    //amd: ['handlebars'],
+                    amd: ['handlebars'],
                     namespace: 'JST',
                     // Registers all files that start with '_' as a partial.
                     partialRegex: /^_/,
