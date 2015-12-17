@@ -41,20 +41,8 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    '<%= env.DIR_TMP %>/assets/scripts/precompiledJst.js': '<%= env.DIR_TMP %>/templates/precompile/**/*.hbs'
+                    '<%= env.DIR_SRC %>/assets/scripts/precompiledJst.js': '<%= env.DIR_TMP %>/templates/precompile/**/*.hbs'
                 }
-            }
-        },
-
-        // Compiles Handlebars hbs templates into JavaScript (JST)
-        copy: {
-            precompileJst: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= env.DIR_TMP %>/',
-                    dest: '<%= env.DIR_DEST %>/',
-                    src: ['assets/scripts/precompiledJst.js']
-                }]
             }
         }
 
@@ -68,8 +56,7 @@ module.exports = function(grunt) {
         ]
             : [
             'string-replace:precompileJst',
-            'handlebars:precompileJst',
-            'copy:precompileJst'
+            'handlebars:precompileJst'
         ]
     );
 };

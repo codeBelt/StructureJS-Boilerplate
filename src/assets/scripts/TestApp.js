@@ -6,7 +6,7 @@ define(function(require, exports, module) { // jshint ignore:line
     var Stage = require('structurejs/display/Stage');
     var NavigationView = require('./view/NavigationView');
     var LoginView = require('./view/LoginView');
-    require('precompiledJst'); // jshint ignore:line
+    require('templates'); // jshint ignore:line
 
     /**
      * TODO: YUIDoc_comment

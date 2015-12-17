@@ -7,12 +7,18 @@ require(
     // RequireJS syntax is used here to specify dependencies. Do not use this
     // syntax in any other modules.
     [
+        'handlebars',
         './TestApp'
     ],
     function(
+        Handlebars,
         TestApp
     ) {
         'use strict';
+
+        // Need Handlebars to be global for StructureJS.TemplateFactory.
+        window.Handlebars = Handlebars;
+
 
         window.app = new TestApp();
         window.app.appendTo('body');    // Need to specify what area our code has control over.
