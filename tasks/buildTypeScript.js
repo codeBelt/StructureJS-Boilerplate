@@ -33,7 +33,7 @@ module.exports = function(grunt) {
                     }
                 },
                 files: {
-                    '<%= env.DIR_SRC %>/assets/scripts/main.js': ['<%= env.DIR_SRC %>/assets/scripts/main.ts']
+                    '<%= env.DIR_TMP %>/assets/scripts/main.js': ['<%= env.DIR_SRC %>/assets/scripts/main.ts']
                 }
             }
         },
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
         // the appropriate `concat` and `uglify` configuration.
         useminPrepare: {
             options: {
-                root: '<%= env.DIR_SRC %>',
+                root: '<%= env.DIR_TMP %>',
                 staging: '<%= env.DIR_TMP %>',
                 dest: '<%= env.DIR_DEST %>',
                 flow: {
@@ -71,20 +71,32 @@ module.exports = function(grunt) {
 
         // Copies static files for non-optimized builds
         copy: {
-            buildTypeScript: {
-                files: [{
-                    expand: true,
-                    cwd: '<%= env.DIR_SRC %>',
-                    dest: '<%= env.DIR_DEST %>',
-                    src: ['assets/{scripts,vendor}/**/*.{map,js}']
-                }]
+            buildTypeScriptDev: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= env.DIR_SRC %>',
+                        dest: '<%= env.DIR_DEST %>',
+                        src: ['assets/vendor/**/*.{map,js}']
+                    },
+                    {
+                        expand: true,
+                        cwd: '<%= env.DIR_TMP %>',
+                        dest: '<%= env.DIR_DEST %>',
+                        src: ['assets/scripts/main.js']
+                    }
+                ]
+            },
+            buildTypeScriptProd: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: '<%= env.DIR_SRC %>',
+                        dest: '<%= env.DIR_TMP %>',
+                        src: ['assets/vendor/**/*.{map,js}']
+                    }
+                ]
             }
-        },
-
-        clean: {
-            buildTypeScript: [
-                '<%= env.DIR_SRC %>/assets/scripts/*.js'
-            ]
         }
 
     });
@@ -106,16 +118,15 @@ module.exports = function(grunt) {
         shouldMinify
             ? [
             'browserify:buildTypeScript',
+            'copy:buildTypeScriptProd',
             'useminPrepare:buildTypeScript',
             'scrub:buildTypeScript',
             'concat:generated',
-            'uglify:generated',
-            'clean:buildTypeScript'
+            'uglify:generated'
         ]
             : [
             'browserify:buildTypeScript',
-            'copy:buildTypeScript',
-            'clean:buildTypeScript'
+            'copy:buildTypeScriptDev'
         ]
     );
 
