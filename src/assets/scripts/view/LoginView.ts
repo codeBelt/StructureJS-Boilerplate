@@ -1,4 +1,4 @@
-import DOMElement = require('../../vendor/structurejs/ts/display/DOMElement');
+import DOMElement from '../../vendor/structurejs/ts/display/DOMElement';
 
 /**
  * TODO: YUIDoc_comment
@@ -106,4 +106,4 @@ class LoginView extends DOMElement {
 
 }
 
-export = LoginView;
+export default LoginView;

@@ -1,6 +1,6 @@
 // Imports
-import $ = require('jquery');
-import TestApp = require('./TestApp');
+//import $ from 'jquery';
+import TestApp from './TestApp';
 
 var app = new TestApp();
 app.appendTo('body');   // Need to specify what area our code has control over.

@@ -1,6 +1,6 @@
-import DOMElement = require('../../vendor/structurejs/ts/display/DOMElement');
+import DOMElement from '../../vendor/structurejs/ts/display/DOMElement';
 
-import DropdownView =  require('./DropdownView');
+import DropdownView from './DropdownView';
 
 /**
  * TODO: YUIDoc_comment
@@ -79,4 +79,4 @@ class NavigationView extends DOMElement {
 
 }
 
-export = NavigationView;
+export default NavigationView;
