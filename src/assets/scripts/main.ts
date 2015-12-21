@@ -1,5 +1,5 @@
 // Imports
-//import $ from 'jquery';
+import * as $ from 'jquery';
 import TestApp from './TestApp';
 
 var app = new TestApp();
