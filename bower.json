@@ -1,7 +1,7 @@
 {
   "name": "StructureJS Boilerplate (TypeScript)",
   "version": "(1.0.0)",
-  "homepage": "https://github.com/codeBelt/StructureJS-Boilerplate/tree/typescript-commonjs",
+  "homepage": "https://github.com/codeBelt/StructureJS-Boilerplate/tree/typescript-es6",
   "authors": [
     "(Robert S. <code@codeBelt.com>"
   ],
