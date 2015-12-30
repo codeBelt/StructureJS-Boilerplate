@@ -1,4 +1,4 @@
-# StructureJS Boilerplate (TypeScript)
+# StructureJS Boilerplate (TypeScript ES6 Modules)
 
 Download dependencies and build:
 
