@@ -1,4 +1,4 @@
-# StructureJS Boilerplate (TypeScript)
+# StructureJS Boilerplate (TypeScript - CommonJS)
 
 Download dependencies and build:
 
