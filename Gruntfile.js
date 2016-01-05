@@ -71,8 +71,15 @@ module.exports = function(grunt) {
                 options: {
                     livereload: true
                 },
-                files: ['<%= env.DIR_SRC %>/**/*.html', '<%= env.DIR_SRC %>/**/*.css'],
-                tasks: ['copy']
+                files: ['<%= env.DIR_SRC %>/**/*.html'],
+                tasks: ['buildMarkup']
+            },
+            styles: {
+                options: {
+                    livereload: true
+                },
+                files: ['<%= env.DIR_SRC %>/**/*.scss'],
+                tasks: ['buildStyles']
             },
             script: {
                 options: {

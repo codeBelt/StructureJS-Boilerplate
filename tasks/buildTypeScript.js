@@ -23,7 +23,7 @@ module.exports = function(grunt) {
                 options: {
                     preBundleCB: function(bundle) {
                         bundle.plugin('tsify', {
-                            removeComments: false,
+                            removeComments: true,
                             noImplicitAny: false,
                             target: 'ES5'
                         });
