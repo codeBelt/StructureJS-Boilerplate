@@ -18,9 +18,9 @@ Use one of the following to generate code for production:
 
 [TypeScript CommonJS Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/typescript-commonjs)
 
-[ES6 Babel Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/babel)
+[Babel ES6 Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/babel)
 
-[ES5 Browserify Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/browserify)
+[Browserify ES5 Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/browserify)
 
-[ES5 RequireJS Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/requirejs)
+[RequireJS ES5 Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/requirejs)
 
