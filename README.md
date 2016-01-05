@@ -1,4 +1,4 @@
-# StructureJS Boilerplate (Browserify)
+# StructureJS Boilerplate (Browserify - ES5)
 
 Download dependencies and build:
 
