@@ -14,8 +14,12 @@ Use one of the following to generate code for production:
 `grunt launch --prod`
 
 #### Other Boilerplates in this Repo:
-[TypeScript ES6 Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/typescript-es6)
-[TypeScript CommonJS Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/typescript-commonjs)
-[ES6 Babel Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/babel)
-[ES5 Browserify Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/browserify)
-[ES5 RequireJS Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/requirejs)
+[TypeScript - ES6 Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/typescript-es6)
+
+[TypeScript - CommonJS Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/typescript-commonjs)
+
+[Babel - ES6 Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/babel)
+
+[Browserify - ES5 Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/browserify)
+
+[RequireJS - ES5 Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/requirejs)
