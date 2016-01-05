@@ -23,4 +23,3 @@ Use one of the following to generate code for production:
 [Browserify - ES5 Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/browserify)
 
 [RequireJS - ES5 Boilerplate](https://github.com/codeBelt/StructureJS-Boilerplate/tree/requirejs)
-
