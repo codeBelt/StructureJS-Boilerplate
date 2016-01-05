@@ -15,9 +15,6 @@ module.exports = function(grunt) {
 
     grunt.config.merge({
 
-        /**
-         * Takes our CommonJS files and compiles them together.
-         */
         browserify: {
             buildTypeScript: {
                 options: {
