@@ -24,6 +24,6 @@
   ],
   "dependencies": {
     "requirejs": "~2.1.22",
-    "structurejs": "*"
+    "structurejs": "0.9.3"
   }
 }
