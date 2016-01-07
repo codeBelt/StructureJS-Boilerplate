@@ -49,25 +49,17 @@ class TestApp extends Stage {
     }
 
     /**
-     * @overridden Stage.enable
+     * @overridden Stage.onEnabled
      */
-    public enable():void {
-        if (this.isEnabled === true) { return; }
-
+    public onEnabled():void {
         // Enable the child objects and/or add any event listeners.
-
-        super.enable();
     }
 
     /**
-     * @overridden Stage.disable
+     * @overridden Stage.onDisabled
      */
-    public disable():void {
-        if (this.isEnabled === false) { return; }
-
+    public onDisabled():void {
         // Disable the child objects and/or remove any event listeners.
-
-        super.disable();
     }
 
     /**
