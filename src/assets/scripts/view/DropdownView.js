@@ -53,8 +53,6 @@ var DropdownView = (function () {
      */
     DropdownView.prototype.layout = function () {
         // Layout or update the objects in this parent class.
-
-        return this;
     };
 
     /**
