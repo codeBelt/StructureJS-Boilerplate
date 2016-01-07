@@ -43,7 +43,7 @@ var LoginView = (function () {
 
         // Create or setup objects in this parent class.
 
-        this._$loginBtn = this.$element.find('.js-loginBtn');
+        this._$loginBtn = this.$element.find('.js-loginView-loginBtn');
     };
 
     /**
