@@ -46,9 +46,7 @@ define(function(require, exports, module) { // jshint ignore:line
          * @overridden DOMElement.enable
          */
         NavigationView.prototype.enable = function () {
-            if (this.isEnabled === true) {
-                return this;
-            }
+            if (this.isEnabled === true) { return this; }
 
             // Enable the child objects and/or add any event listeners.
 
@@ -59,9 +57,7 @@ define(function(require, exports, module) { // jshint ignore:line
          * @overridden DOMElement.disable
          */
         NavigationView.prototype.disable = function () {
-            if (this.isEnabled === false) {
-                return this;
-            }
+            if (this.isEnabled === false) { return this; }
 
             // Disable the child objects and/or remove any event listeners.
 
@@ -73,8 +69,6 @@ define(function(require, exports, module) { // jshint ignore:line
          */
         NavigationView.prototype.layout = function () {
             // Layout or update the objects in this parent class.
-
-            return this;
         };
 
         /**

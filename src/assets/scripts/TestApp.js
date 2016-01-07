@@ -83,8 +83,6 @@ define(function(require, exports, module) { // jshint ignore:line
          */
         TestApp.prototype.layout = function () {
             // Layout or update the objects in this parent class.
-
-            return this;
         };
 
         /**
