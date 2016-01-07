@@ -39,33 +39,25 @@ class LoginView extends DOMElement {
 
         // Create or setup objects in this parent class.
 
-        this._$loginBtn = this.$element.find('.js-loginBtn');
+        this._$loginBtn = this.$element.find('.js-loginView-loginBtn');
     }
 
     /**
-     * @overridden DOMElement.enable
+     * @overridden DOMElement.onEnabled
      */
-    enable() {
-        if (this.isEnabled === true) { return this; }
-
+    onEnabled() {
         // Enable the child objects and/or add any event listeners.
 
         this._$loginBtn.addEventListener('click', this._onClick, this);
-
-        return super.enable();
     }
 
     /**
-     * @overridden DOMElement.disable
+     * @overridden DOMElement.onDisabled
      */
-    disable() {
-        if (this.isEnabled === false) { return this; }
-
+    onDisabled() {
         // Disable the child objects and/or remove any event listeners.
 
         this._$loginBtn.removeEventListener('click', this._onClick, this);
-
-        return super.disable();
     }
 
     /**
@@ -73,8 +65,6 @@ class LoginView extends DOMElement {
      */
     layout() {
         // Layout or update the objects in this parent class.
-
-        return this;
     }
 
     /**

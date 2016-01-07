@@ -23,25 +23,17 @@ class DropdownView extends DOMElement {
     }
 
     /**
-     * @overridden DOMElement.enable
+     * @overridden DOMElement.onEnabled
      */
-    enable():void {
-        if (this.isEnabled === true) { return; }
-
+    onEnabled():void {
         // Enable the child objects and/or add any event listeners.
-
-        super.enable();
     }
 
     /**
-     * @overridden DOMElement.disable
+     * @overridden DOMElement.onDisabled
      */
-    disable():void {
-        if (this.isEnabled === false) { return; }
-
+    onDisabled():void {
         // Disable the child objects and/or remove any event listeners.
-
-        super.disable();
     }
 
     /**
