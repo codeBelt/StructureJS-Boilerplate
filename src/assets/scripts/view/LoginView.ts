@@ -43,21 +43,29 @@ class LoginView extends DOMElement {
     }
 
     /**
-     * @overridden DOMElement.onEnabled
+     * @overridden DOMElement.enable
      */
-    public onEnabled():void {
+    public enable():void {
+        if (this.isEnabled === true) { return; }
+
         // Enable the child objects and/or add any event listeners.
 
         this._$loginBtn.addEventListener('click', this._onClick, this);
+
+        super.enable();
     }
 
     /**
-     * @overridden DOMElement.onDisabled
+     * @overridden DOMElement.disable
      */
-    public onDisabled():void {
+    public disable():void {
+        if (this.isEnabled === false) { return; }
+
         // Disable the child objects and/or remove any event listeners.
 
         this._$loginBtn.removeEventListener('click', this._onClick, this);
+
+        super.disable();
     }
 
     /**
