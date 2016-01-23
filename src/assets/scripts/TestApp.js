@@ -60,22 +60,22 @@ define(function(require, exports, module) { // jshint ignore:line
          * @overridden Stage.enable
          */
         TestApp.prototype.enable = function () {
-            if (this.isEnabled === true) { return this; }
+            if (this.isEnabled === true) { return; }
 
             // Enable the child objects and/or add any event listeners.
 
-            return _super.prototype.enable.call(this);
+            _super.prototype.enable.call(this);
         };
 
         /**
          * @overridden Stage.disable
          */
         TestApp.prototype.disable = function () {
-            if (this.isEnabled === false) { return this; }
+            if (this.isEnabled === false) { return; }
 
             // Disable the child objects and/or remove any event listeners.
 
-            return _super.prototype.disable.call(this);
+            _super.prototype.disable.call(this);
         };
 
         /**

@@ -33,11 +33,11 @@ define(function(require, exports, module) { // jshint ignore:line
          * @overridden DOMElement.enable
          */
         DropdownView.prototype.enable = function () {
-            if (this.isEnabled === true) { return this; }
+            if (this.isEnabled === true) { return; }
 
             // Enable the child objects and/or add any event listeners.
 
-            return _super.prototype.enable.call(this);
+            _super.prototype.enable.call(this);
         };
 
         /**
@@ -48,7 +48,7 @@ define(function(require, exports, module) { // jshint ignore:line
 
             // Disable the child objects and/or remove any event listeners.
 
-            return _super.prototype.disable.call(this);
+            _super.prototype.disable.call(this);
         };
 
         /**
