@@ -44,6 +44,6 @@
     "remapify": "^2.1.0",
     "time-grunt": "^1.2.2",
     "tsify": "^0.12.2",
-    "typescript": "^1.6.2"
+    "typescript": "^1.8.10"
   }
 }

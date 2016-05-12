@@ -1,5 +1,5 @@
-// Imports
-import * as $ from 'jquery';
+/// <reference path="../../../typings/main.d.ts" />
+
 import TestApp from './TestApp';
 
 var app = new TestApp();

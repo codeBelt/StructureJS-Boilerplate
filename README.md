@@ -4,6 +4,7 @@ Download dependencies and build:
 
     npm install
     bower install
+    typings install
 
     grunt launch --open
 
